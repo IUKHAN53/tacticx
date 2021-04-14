@@ -96,7 +96,7 @@ Heroicon name: outline/x" x-state:on="Menu open" x-state:off="Menu closed" class
                         class="origin-top-right absolute z-10 right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 py-1 focus:outline-none"
                         role="menu" aria-orientation="vertical" aria-labelledby="user-menu" style="display: none;">
 
-                        <a href="{{route('')}}" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Your
+                        <a href="{{route('profile.show')}}" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Your
                             Profile</a>
 
                         <a href="#" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100"
@@ -140,12 +140,12 @@ Heroicon name: outline/x" x-state:on="Menu open" x-state:off="Menu closed" class
             <div class="max-w-3xl mx-auto px-4 flex items-center sm:px-6">
                 <div class="flex-shrink-0">
                     <img class="h-10 w-10 rounded-full"
-                        src="{{auth()->user()->profile_photo_url}}"
+                        src="https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&amp;ixqx=FLYCBl6NlW&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=2&amp;w=256&amp;h=256&amp;q=80"
                         alt="">
                 </div>
                 <div class="ml-3">
-                    <div class="text-base font-medium text-gray-800">{{auth()->user()->name}}</div>
-                    <div class="text-sm font-medium text-gray-500">{{auth()->user()->email}}</div>
+                    <div class="text-base font-medium text-gray-800">Chelsea Hagon</div>
+                    <div class="text-sm font-medium text-gray-500">chelseahagon@example.com</div>
                 </div>
                 <button type="button"
                     class="ml-auto flex-shrink-0 bg-white rounded-full p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">

@@ -1,7 +1,7 @@
 <?php
 
-use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
+use Laravel\Jetstream\Http\Controllers\Livewire\UserProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,4 +20,6 @@ Route::get('/', function () {
 Route::prefix('/')->middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::view('/dashboard', 'dashboard')->name('dashboard');
     Route::resource('posts', PostController::class);
+    Route::get('/user/profile', [UserProfileController::class, 'show'])
+        ->name('profile.show');
 });
