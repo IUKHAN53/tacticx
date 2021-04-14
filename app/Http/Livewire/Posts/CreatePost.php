@@ -45,6 +45,7 @@ class CreatePost extends Component
         $validated_values['published_at'] = now();
         $validated_values['user_id'] = auth()->id();
         $post = Post::create($validated_values);
+        dd
         dd('Added Post Successfully');
     }
 }
