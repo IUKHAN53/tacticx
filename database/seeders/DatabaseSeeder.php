@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Pair;
+use App\Models\Post;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -16,5 +18,9 @@ class DatabaseSeeder extends Seeder
         $this->call([
             RoleSeeder::class,
         ]);
+        Pair::create(['name' => 'XRP', 'type' => 'USDT']);
+        Pair::create(['name' => 'STORJ', 'type' => 'BNB']);
+        Pair::create(['name' => 'DOGE', 'type' => 'BTC']);
+        Pair::create(['name' => 'TETHER', 'type' => 'ETH']);
     }
 }

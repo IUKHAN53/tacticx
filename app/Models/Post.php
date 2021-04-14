@@ -9,10 +9,10 @@ use Spatie\Tags\HasTags;
 
 class Post extends Model
 {
-    use HasFactory;
     use HasTags;
+    use HasFactory;
 
-    protected $guarder = [];
+    protected $guarded = [];
 
     protected $casts = [
         'published_at' => 'datetime',
