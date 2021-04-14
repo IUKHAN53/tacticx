@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Posts;
 
 use Livewire\Component;
+use App\Http\Models\Post;
 use Livewire\WithFileUploads;
 
 class CreatePost extends Component
@@ -16,16 +17,18 @@ class CreatePost extends Component
     public $image_link;
     public $description;
     public $disclaimer;
+    public $tags;
 
     protected $rules = [
         'type' => 'required',
         'strategy' => 'required',
         'status' => 'required',
         'timeframe' => 'required',
-        'chart_link' => 'required',
-        'image_link' => 'required',
+        'chart_link' => 'url',
+        'image_link' => 'url',
         'description' => 'required',
         'disclaimer' => 'required',
+        'tags' => 'required',
     ];
 
     public function render()
@@ -34,6 +37,10 @@ class CreatePost extends Component
     }
 
     public function savePost(){
-        $this->validate();
+        $validated_values = $this->validate();
+        $validated_values['published_at'] = now();
+        $validated_values['user_id'] = auth()->id();
+        $post = Post::create($validated_values);
+        dd($post);
     }
 }
