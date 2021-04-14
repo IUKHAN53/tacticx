@@ -7,13 +7,13 @@ use Livewire\WithFileUploads;
 
 class CreatePost extends Component
 {
-    use WithFileUploads;
 
     public $type;
     public $strategy;
     public $status;
     public $timeframe;
-    public $cover_photo;
+    public $chart_link;
+    public $image_link;
     public $description;
     public $disclaimer;
 
@@ -22,7 +22,8 @@ class CreatePost extends Component
         'strategy' => 'required',
         'status' => 'required',
         'timeframe' => 'required',
-        'cover_photo' => 'required',
+        'chart_link' => 'required',
+        'image_link' => 'required',
         'description' => 'required',
         'disclaimer' => 'required',
     ];
