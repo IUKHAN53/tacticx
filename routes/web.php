@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Laravel\Jetstream\Http\Controllers\Livewire\UserProfileController;
-
+use App\Http\Livewire\Posts\CreatePost;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -22,4 +22,5 @@ Route::prefix('/')->middleware(['auth:sanctum', 'verified'])->group(function () 
     Route::resource('posts', PostController::class);
     Route::get('/user/profile', [UserProfileController::class, 'show'])
         ->name('profile.show');
+    Route::get('/post/create', CreatePost::class)->name('create-post');
 });

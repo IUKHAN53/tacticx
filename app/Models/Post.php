@@ -5,22 +5,14 @@ namespace App\Models;
 use App\Models\Scopes\Searchable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Spatie\Tags\HasTags;
 
 class Post extends Model
 {
     use HasFactory;
+    use HasTags;
 
-    protected $fillable = [
-        'description',
-        'image_link',
-        'chart_link',
-        'status',
-        'strategy',
-        'timeframe',
-        'type',
-        'disclaimer',
-        'published_at',
-    ];
+    protected $guarder = [];
 
     protected $casts = [
         'published_at' => 'datetime',
