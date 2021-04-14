@@ -15,15 +15,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect(route('dashboard'));
 });
-
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
-
-Route::prefix('/')
-    ->middleware(['auth:sanctum', 'verified'])
-    ->group(function () {
-        Route::resource('posts', PostController::class);
-    });
+Route::prefix('/')->middleware(['auth:sanctum', 'verified'])->group(function () {
+    Route::view('/dashboard', 'dashboard')->name('dashboard');
+    Route::resource('posts', PostController::class);
+});
