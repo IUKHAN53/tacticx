@@ -4,7 +4,7 @@
         <div class="border-t border-gray-200 py-3">
             <nav class="flex" aria-label="Breadcrumb">
                 <div class="flex sm:hidden">
-                    <a href="#"
+                    <a href="{{route('dashboard')}}"
                         class="group inline-flex space-x-3 text-sm font-medium text-gray-500 hover:text-gray-700">
                         <svg class="flex-shrink-0 h-5 w-5 text-gray-400 group-hover:text-gray-600"
                             x-description="Heroicon name: solid/arrow-narrow-left" xmlns="http://www.w3.org/2000/svg"

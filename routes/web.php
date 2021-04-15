@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Livewire\Dashboard;
+use App\Http\Livewire\Posts\ShowPost;
 use Illuminate\Support\Facades\Route;
 use Laravel\Jetstream\Http\Controllers\Livewire\UserProfileController;
 use App\Http\Livewire\Posts\CreatePost;
@@ -22,5 +23,8 @@ Route::get('/', function () {
 Route::prefix('/')->middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/dashboard', Dashboard::class)->name('dashboard');
     Route::get('/user/profile', [UserProfileController::class, 'show'])->name('profile.show');
-    Route::get('/post/create', CreatePost::class)->name('create-post');
+    Route::prefix('/post')->group(function (){
+        Route::get('/create', CreatePost::class)->name('create-post');
+        Route::get('/{post_id}', ShowPost::class)->name('show-post');
+    });
 });

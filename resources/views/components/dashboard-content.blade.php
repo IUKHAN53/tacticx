@@ -118,9 +118,16 @@
                             </h2>
                         </div>
                         <div class="mt-2 text-sm text-gray-700 space-y-4">
-                            <p>
+                            <p class="line-clamp-3">
                                 {{$post->description}}
                             </p>
+                            <div class="flex items-center justify-end">
+                                <button type="button" wire:click="postDetails({{$post->id}})"
+                                        class="inline-flex items-center px-2.5 py-1.5 border border-gray-300 shadow-sm text-xs font-medium rounded text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                    View details
+                                </button>
+                            </div>
+
                         </div>
                         <div class="mt-6 flex justify-between space-x-8">
                             <div class="flex space-x-6">
@@ -134,7 +141,7 @@
                                               d="M18 5v8a2 2 0 01-2 2h-5l-5 4v-4H4a2 2 0 01-2-2V5a2 2 0 012-2h12a2 2 0 012 2zM7 8H5v2h2V8zm2 0h2v2H9V8zm6 0h-2v2h2V8z"
                                               clip-rule="evenodd"></path>
                                     </svg>
-                                    <span class="font-medium text-gray-900">11</span>
+                                    <span class="font-medium text-gray-900">{{$post->comments->count()}}</span>
                                     <span class="sr-only">replies</span>
                                 </button>
                             </span>
@@ -154,7 +161,7 @@
                             </span>
                             </div>
                             <div class="flex text-sm">
-                                @if($post->user->status == 'Pro')
+                                @if($post->type == 'Pro')
                                     <span class="inline-flex items-center text-sm">
                                         <button class="inline-flex space-x-2 text-gray-400 hover:text-gray-500">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
@@ -163,11 +170,11 @@
                                                       d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
                                                       clip-rule="evenodd"/>
                                             </svg>
-                                            <span class="font-bold text-gray-900">Pro</span>
+                                            <span class="font-bold text-gray-900">{{$post->type}}</span>
                                         </button>
                                     </span>
-                                    @else
-                                        <span class="font-bold text-gray-900">Basic</span>
+                                @else
+                                    <span class="font-bold text-gray-900">{{$post->type}}</span>
                                 @endif
                             </div>
                         </div>
