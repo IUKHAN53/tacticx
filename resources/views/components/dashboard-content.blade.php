@@ -3,7 +3,7 @@
         <div class="sm:hidden">
             <label for="question-tabs" class="sr-only">Select a tab</label>
             <select id="question-tabs"
-                class="block w-full rounded-md border-gray-300 text-base font-medium text-gray-900 shadow-sm focus:border-gray-500 focus:ring-gray-500">
+                    class="block w-full rounded-md border-gray-300 text-base font-medium text-gray-900 shadow-sm focus:border-gray-500 focus:ring-gray-500">
 
                 <option selected="">Active</option>
 
@@ -17,23 +17,23 @@
             <nav class="relative z-0 rounded-lg shadow flex divide-x divide-gray-200" aria-label="Tabs">
 
                 <a href="#" aria-current="page"
-                    class="text-gray-900 rounded-l-lg  group relative min-w-0 flex-1 overflow-hidden bg-white py-4 px-6 text-sm font-medium text-center hover:bg-gray-50 focus:z-10"
-                    x-state:on="Current" x-state:off="Default"
-                    x-state-description="Current: &quot;text-gray-900&quot;, Default: &quot;text-gray-500 hover:text-gray-700&quot;">
+                   class="text-gray-900 rounded-l-lg  group relative min-w-0 flex-1 overflow-hidden bg-white py-4 px-6 text-sm font-medium text-center hover:bg-gray-50 focus:z-10"
+                   x-state:on="Current" x-state:off="Default"
+                   x-state-description="Current: &quot;text-gray-900&quot;, Default: &quot;text-gray-500 hover:text-gray-700&quot;">
                     <span>Active</span>
                     <span aria-hidden="true" class="bg-gray-500 absolute inset-x-0 bottom-0 h-0.5"></span>
                 </a>
 
                 <a href="#"
-                    class="text-gray-500 hover:text-gray-700   group relative min-w-0 flex-1 overflow-hidden bg-white py-4 px-6 text-sm font-medium text-center hover:bg-gray-50 focus:z-10"
-                    x-state-description="undefined: &quot;text-gray-900&quot;, undefined: &quot;text-gray-500 hover:text-gray-700&quot;">
+                   class="text-gray-500 hover:text-gray-700   group relative min-w-0 flex-1 overflow-hidden bg-white py-4 px-6 text-sm font-medium text-center hover:bg-gray-50 focus:z-10"
+                   x-state-description="undefined: &quot;text-gray-900&quot;, undefined: &quot;text-gray-500 hover:text-gray-700&quot;">
                     <span>Closed</span>
                     <span aria-hidden="true" class="bg-transparent absolute inset-x-0 bottom-0 h-0.5"></span>
                 </a>
 
                 <a href="#"
-                    class="text-gray-500 hover:text-gray-700  rounded-r-lg group relative min-w-0 flex-1 overflow-hidden bg-white py-4 px-6 text-sm font-medium text-center hover:bg-gray-50 focus:z-10"
-                    x-state-description="undefined: &quot;text-gray-900&quot;, undefined: &quot;text-gray-500 hover:text-gray-700&quot;">
+                   class="text-gray-500 hover:text-gray-700  rounded-r-lg group relative min-w-0 flex-1 overflow-hidden bg-white py-4 px-6 text-sm font-medium text-center hover:bg-gray-50 focus:z-10"
+                   x-state-description="undefined: &quot;text-gray-900&quot;, undefined: &quot;text-gray-500 hover:text-gray-700&quot;">
                     <span>Cancelled</span>
                     <span aria-hidden="true" class="bg-transparent absolute inset-x-0 bottom-0 h-0.5"></span>
                 </a>
@@ -43,143 +43,137 @@
     </div>
     <div class="mt-4">
         <ul class="space-y-4" x-max="1">
-
-            <li class="bg-white px-4 py-6 shadow sm:p-6 sm:rounded-lg">
-                <article aria-labelledby="question-title-81614">
-                    <div>
-                        <div class="flex space-x-3">
-                            <div class="flex-shrink-0">
-                                <img class="h-10 w-10 rounded-full"
-                                    src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&amp;ixqx=FLYCBl6NlW&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=2&amp;w=256&amp;h=256&amp;q=80"
-                                    alt="">
-                            </div>
-                            <div class="min-w-0 flex-1">
-                                <p class="text-sm font-medium text-gray-900">
-                                    <a href="#" class="hover:underline">Dries Vincent</a>
-                                </p>
-                                <p class="text-sm text-gray-500">
-                                    <a href="#" class="hover:underline">
-                                        <time datetime="2020-12-09T11:43:00">December 9 at 11:43 AM</time>
-                                    </a>
-                                </p>
-                            </div>
-                            <div class="flex-shrink-0 self-center flex">
-                                <div x-data="{ open: false }" @keydown.escape.stop="open = false"
-                                    @click.away="open = false" class="relative inline-block text-left">
-                                    <div>
-                                        <button type="button"
-                                            class="-m-2 p-2 rounded-full flex items-center text-gray-400 hover:text-gray-600"
-                                            id="options-menu-0" @click="open = !open" aria-haspopup="true"
-                                            x-bind:aria-expanded="open">
-                                            <span class="sr-only">Open options</span>
-                                            <svg class="h-5 w-5" x-description="Heroicon name: solid/dots-vertical"
-                                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
-                                                fill="currentColor" aria-hidden="true">
-                                                <path
-                                                    d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z">
-                                                </path>
-                                            </svg>
-                                        </button>
-                                    </div>
-
-
-                                    <div x-show="open" x-description="Dropdown menu, show/hide based on menu state."
-                                        x-transition:enter="transition ease-out duration-100"
-                                        x-transition:enter-start="transform opacity-0 scale-95"
-                                        x-transition:enter-end="transform opacity-100 scale-100"
-                                        x-transition:leave="transition ease-in duration-75"
-                                        x-transition:leave-start="transform opacity-100 scale-100"
-                                        x-transition:leave-end="transform opacity-0 scale-95"
-                                        class="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
-                                        role="menu" aria-orientation="vertical" aria-labelledby="options-menu-0"
-                                        style="display: none;">
-                                        <div class="py-1" role="none">
-                                            <a href="#"
-                                                class="flex px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
-                                                role="menuitem">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
-                                                    viewBox="0 0 24 24" stroke="currentColor">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        stroke-width="2"
-                                                        d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+            @foreach($posts as $post)
+                <li class="bg-white px-4 py-6 shadow sm:p-6 sm:rounded-lg">
+                    <article aria-labelledby="question-title-81614">
+                        <div>
+                            <div class="flex space-x-3">
+                                <div class="flex-shrink-0">
+                                    <img class="h-10 w-10 rounded-full" src="{{$post->user->profile_photo_url}}" alt="">
+                                </div>
+                                <div class="min-w-0 flex-1">
+                                    <p class="text-sm font-medium text-gray-900">
+                                        <a href="#" class="hover:underline">{{$post->user->name}}</a>
+                                    </p>
+                                    <p class="text-sm text-gray-500">
+                                        <a href="#" class="hover:underline">
+                                            <time datetime="2020-12-09T11:43:00">{{$post->published_at}}</time>
+                                        </a>
+                                    </p>
+                                </div>
+                                <div class="flex-shrink-0 self-center flex">
+                                    <div x-data="{ open: false }" @keydown.escape.stop="open = false"
+                                         @click.away="open = false" class="relative inline-block text-left">
+                                        <div>
+                                            <button type="button"
+                                                    class="-m-2 p-2 rounded-full flex items-center text-gray-400 hover:text-gray-600"
+                                                    id="options-menu-0" @click="open = !open" aria-haspopup="true"
+                                                    x-bind:aria-expanded="open">
+                                                <span class="sr-only">Open options</span>
+                                                <svg class="h-5 w-5" x-description="Heroicon name: solid/dots-vertical"
+                                                     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                                                     fill="currentColor" aria-hidden="true">
+                                                    <path
+                                                        d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z">
+                                                    </path>
                                                 </svg>
-                                                <span>Edit</span>
-                                            </a>
+                                            </button>
                                         </div>
-                                    </div>
 
+                                        <div x-show="open" x-description="Dropdown menu, show/hide based on menu state."
+                                             x-transition:enter="transition ease-out duration-100"
+                                             x-transition:enter-start="transform opacity-0 scale-95"
+                                             x-transition:enter-end="transform opacity-100 scale-100"
+                                             x-transition:leave="transition ease-in duration-75"
+                                             x-transition:leave-start="transform opacity-100 scale-100"
+                                             x-transition:leave-end="transform opacity-0 scale-95"
+                                             class="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
+                                             role="menu" aria-orientation="vertical" aria-labelledby="options-menu-0"
+                                             style="display: none;">
+                                            <div class="py-1" role="none">
+                                                <a href="#"
+                                                   class="flex px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+                                                   role="menuitem">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
+                                                         viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                                              stroke-width="2"
+                                                              d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                                                    </svg>
+                                                    <span>Edit</span>
+                                                </a>
+                                            </div>
+                                        </div>
+
+                                    </div>
                                 </div>
                             </div>
+                            <h2 id="question-title-81614" class="mt-4 text-base font-medium text-gray-900">
+                                @foreach($post->tags as $tag)
+                                    <span
+                                        class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
+                                        {{$tag->name}}
+                                    </span>
+                                @endforeach
+                            </h2>
                         </div>
-                        <h2 id="question-title-81614" class="mt-4 text-base font-medium text-gray-900">
-                            <span class="font-semibold">ADABTC</span>
-                            <span
-                                class="inline-flex items-center px-3 py-0.5 rounded-full bg-gray-50 text-sm font-medium text-gray-700 hover:bg-gray-100">Volume</span>
-                            <span
-                                class="inline-flex items-center px-3 py-0.5 rounded-full bg-gray-50 text-sm font-medium text-gray-700 hover:bg-gray-100">Elliott
-                                Wave</span>
-                            <span
-                                class="inline-flex items-center px-3 py-0.5 rounded-full bg-green-50 text-sm font-medium text-green-700 hover:bg-green-100">LONG</span>
-                        </h2>
-                    </div>
-                    <div class="mt-2 text-sm text-gray-700 space-y-4">
-
-                        <p>
-                            Space, the final frontier. These are the voyages of the Starship Enterprise. Its five-year
-                            mission: to explore strange
-                            new worlds, to seek out new life and new civilizations, to boldly go where no man has gone
-                            before.
-                        </p>
-
-                    </div>
-                    <div class="mt-6 flex justify-between space-x-8">
-                        <div class="flex space-x-6">
+                        <div class="mt-2 text-sm text-gray-700 space-y-4">
+                            <p>
+                                {{$post->description}}
+                            </p>
+                        </div>
+                        <div class="mt-6 flex justify-between space-x-8">
+                            <div class="flex space-x-6">
 
                             <span class="inline-flex items-center text-sm">
                                 <button class="inline-flex space-x-2 text-gray-400 hover:text-gray-500">
                                     <svg class="h-5 w-5" x-description="Heroicon name: solid/chat-alt"
-                                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
-                                        aria-hidden="true">
+                                         xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+                                         aria-hidden="true">
                                         <path fill-rule="evenodd"
-                                            d="M18 5v8a2 2 0 01-2 2h-5l-5 4v-4H4a2 2 0 01-2-2V5a2 2 0 012-2h12a2 2 0 012 2zM7 8H5v2h2V8zm2 0h2v2H9V8zm6 0h-2v2h2V8z"
-                                            clip-rule="evenodd"></path>
+                                              d="M18 5v8a2 2 0 01-2 2h-5l-5 4v-4H4a2 2 0 01-2-2V5a2 2 0 012-2h12a2 2 0 012 2zM7 8H5v2h2V8zm2 0h2v2H9V8zm6 0h-2v2h2V8z"
+                                              clip-rule="evenodd"></path>
                                     </svg>
                                     <span class="font-medium text-gray-900">11</span>
                                     <span class="sr-only">replies</span>
                                 </button>
                             </span>
-                            <span class="inline-flex items-center text-sm">
+                                <span class="inline-flex items-center text-sm">
                                 <button class="inline-flex space-x-2 text-gray-400 hover:text-gray-500">
                                     <svg class="h-5 w-5" x-description="Heroicon name: solid/eye"
-                                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
-                                        aria-hidden="true">
+                                         xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+                                         aria-hidden="true">
                                         <path d="M10 12a2 2 0 100-4 2 2 0 000 4z"></path>
                                         <path fill-rule="evenodd"
-                                            d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z"
-                                            clip-rule="evenodd"></path>
+                                              d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z"
+                                              clip-rule="evenodd"></path>
                                     </svg>
                                     <span class="font-medium text-gray-900">2.7k</span>
                                     <span class="sr-only">views</span>
                                 </button>
                             </span>
+                            </div>
+                            <div class="flex text-sm">
+                                @if($post->user->status == 'Pro')
+                                    <span class="inline-flex items-center text-sm">
+                                        <button class="inline-flex space-x-2 text-gray-400 hover:text-gray-500">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
+                                                 fill="currentColor">
+                                                <path fill-rule="evenodd"
+                                                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                                      clip-rule="evenodd"/>
+                                            </svg>
+                                            <span class="font-bold text-gray-900">Pro</span>
+                                        </button>
+                                    </span>
+                                    @else
+                                        <span class="font-bold text-gray-900">Basic</span>
+                                @endif
+                            </div>
                         </div>
-                        <div class="flex text-sm">
-                            <span class="inline-flex items-center text-sm">
-                                <button class="inline-flex space-x-2 text-gray-400 hover:text-gray-500">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
-                                        fill="currentColor">
-                                        <path fill-rule="evenodd"
-                                            d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                                            clip-rule="evenodd" />
-                                    </svg>
-                                    <span class="font-bold text-gray-900">Pro</span>
-                                </button>
-                            </span>
-                        </div>
-                    </div>
-                </article>
-            </li>
-
+                    </article>
+                </li>
+            @endforeach
         </ul>
     </div>
 </main>

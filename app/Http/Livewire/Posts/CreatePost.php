@@ -47,6 +47,6 @@ class CreatePost extends Component
         $validated_values['user_id'] = auth()->id();
         $validated_values['tags'] = $tag_array;
         $post = Post::create($validated_values);
-        dd('Added Post Successfully');
+        $this->redirect(route('dashboard'));
     }
 }
