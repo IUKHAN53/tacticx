@@ -43,7 +43,7 @@
     </div>
     <div class="mt-4">
         <ul class="space-y-4" x-max="1">
-            @foreach($posts as $post)
+            @forelse($posts as $post)
                 <li class="bg-white px-4 py-6 shadow sm:p-6 sm:rounded-lg">
                     <article aria-labelledby="question-title-81614">
                         <div>
@@ -173,7 +173,9 @@
                         </div>
                     </article>
                 </li>
-            @endforeach
+            @empty
+                <p>No Posts added yet..</p>
+            @endforelse
         </ul>
     </div>
 </main>
