@@ -40,10 +40,12 @@ class CreatePost extends Component
     }
 
     public function savePost(){
+        $tag_array = explode(',',$this->tags);
         $validated_values = $this->validate();
         unset($validated_values['tags']);
         $validated_values['published_at'] = now();
         $validated_values['user_id'] = auth()->id();
+        $validated_values['tags'] = $tag_array;
         $post = Post::create($validated_values);
         dd('Added Post Successfully');
     }
