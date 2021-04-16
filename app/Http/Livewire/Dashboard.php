@@ -14,6 +14,9 @@ class Dashboard extends Component
     }
     public function render()
     {
+        if(auth()->user()->hasRole('Super Admin')){
+            $this->redirect(route('admin-dashboard'));
+        }
         return view('dashboard');
     }
 
