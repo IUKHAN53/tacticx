@@ -42,7 +42,7 @@
                             </th>
                         <th scope="col"
                                 class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                Type
+                                Actions
                             </th>
                         </tr>
                         </thead>
@@ -72,7 +72,7 @@
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                     <a href="{{route('editor-add-post',['post_id'=>$post->id])}}" class="text-indigo-600 hover:text-indigo-900">Edit |</a>
-                                    <a wire:click="destroy('{{$post->id}}')" class="text-red-600 hover:text-indigo-900">Delete</a>
+                                    <a wire:click="destroy('{{$post->id}}')" class="cursor-pointer text-red-600 hover:text-indigo-900">Delete</a>
                                 </td>
                             </tr>
                         @empty

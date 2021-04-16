@@ -4,9 +4,7 @@ namespace App\Http\Livewire\Posts;
 
 use App\Models\Pair;
 use App\Models\Post;
-use Illuminate\Database\Eloquent\Model;
 use Livewire\Component;
-use Livewire\WithFileUploads;
 
 class CreatePost extends Component
 {
