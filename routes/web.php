@@ -24,7 +24,9 @@ Route::prefix('/')->middleware(['auth:sanctum', 'verified'])->group(function () 
     Route::get('/dashboard', Dashboard::class)->name('dashboard');
     Route::get('/user/profile', [UserProfileController::class, 'show'])->name('profile.show');
     Route::prefix('/post')->group(function (){
-        Route::get('/create', CreatePost::class)->name('create-post');
+        Route::middleware(['role:Editor|Super Admin'])->group(function(){
+            Route::get('/add', CreatePost::class)->name('editor-add-post');
+        });
         Route::get('/{post_id}', ShowPost::class)->name('show-post');
     });
 });

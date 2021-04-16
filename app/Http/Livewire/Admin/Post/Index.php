@@ -14,4 +14,8 @@ class Index extends Component
         $this->posts = Post::with('comments','tags','user')->get();
         return view('livewire.admin.post.index');
     }
+    public function destroy(Post $post){
+        $post->delete();
+        $this->mount();
+    }
 }

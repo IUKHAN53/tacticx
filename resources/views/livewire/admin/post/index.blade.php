@@ -1,6 +1,6 @@
 <div class="lg:col-span-12 xl:col-span-12">
     <div class="flex mt-6 justify-end">
-        <a href="{{route('create-post')}}"  class="ml-6 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium cursor-pointer
+        <a href="{{route('editor-add-post')}}"  class="ml-6 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium cursor-pointer
         rounded-md shadow-sm text-white bg-gray-600 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
             Add new Post
         </a>
@@ -71,8 +71,8 @@
                                     {{$post->type}}
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                    <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit |</a>
-                                    <a href="#" class="text-red-600 hover:text-indigo-900">Delete</a>
+                                    <a href="{{route('editor-add-post',['post_id'=>$post->id])}}" class="text-indigo-600 hover:text-indigo-900">Edit |</a>
+                                    <a wire:click="destroy('{{$post->id}}')" class="text-red-600 hover:text-indigo-900">Delete</a>
                                 </td>
                             </tr>
                         @empty

@@ -4,12 +4,14 @@ namespace App\Http\Livewire\Posts;
 
 use App\Models\Pair;
 use App\Models\Post;
+use Illuminate\Database\Eloquent\Model;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
 class CreatePost extends Component
 {
-
+    protected $queryString = ['post_id'];
+    public $post_id;
     public $type;
     public $strategy;
     public $status;
@@ -20,6 +22,8 @@ class CreatePost extends Component
     public $disclaimer;
     public $tags;
     public $pair_id;
+    public $editing = false;
+    public $edit_post;
 
     protected $rules = [
         'type' => 'required',
@@ -33,7 +37,23 @@ class CreatePost extends Component
         'tags' => 'required',
         'pair_id' => 'required',
     ];
-
+    public function mount()
+    {
+        if ($this->post_id) {
+            $this->edit_post = Post::findOrFail($this->post_id);
+            $this->type = $this->edit_post->type;
+            $this->strategy = $this->edit_post->strategy;
+            $this->status = $this->edit_post->status;
+            $this->timeframe = $this->edit_post->timeframe;
+            $this->chart_link = $this->edit_post->chart_link;
+            $this->image_link = $this->edit_post->image_link;
+            $this->description = $this->edit_post->description;
+            $this->disclaimer = $this->edit_post->disclaimer;
+            $this->tags = implode(',',$this->edit_post->tags->pluck('name')->toArray());
+            $this->pair_id = $this->edit_post->pair->id;
+            $this->editing = true;
+        }
+    }
     public function render()
     {
         return view('livewire.posts.create-post')->with('pairs',Pair::all());
@@ -46,7 +66,11 @@ class CreatePost extends Component
         $validated_values['published_at'] = now();
         $validated_values['user_id'] = auth()->id();
         $validated_values['tags'] = $tag_array;
-        $post = Post::create($validated_values);
+        if ($this->editing) {
+            $post = $this->edit_post->update($validated_values);
+        } else {
+            $post = Post::create($validated_values);
+        }
         $this->redirect(route('dashboard'));
     }
 }
