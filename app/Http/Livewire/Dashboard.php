@@ -20,7 +20,11 @@ class Dashboard extends Component
         return view('dashboard');
     }
 
-    public function postDetails($post){
-        $this->redirect(route('show-post',$post));
+    public function postDetails(Post $post){
+        if($post->type == 'Pro' && auth()->user()->status =='Basic'){
+
+        }else{
+            $this->redirect(route('show-post',$post));
+        }
     }
 }

@@ -60,9 +60,17 @@ Heroicon name: outline/x" x-state:on="Menu open" x-state:off="Menu closed" class
                 </button>
             </div>
             <div class="hidden lg:flex lg:items-center lg:justify-end xl:col-span-4">
-                <a href="#" class="text-sm font-medium text-gray-900 hover:underline">
-                    Go Premium
-                </a>
+                @role('Member')
+                @if(auth()->user()->status == 'Basic')
+                    <a href="#" class="text-sm font-medium text-gray-900 hover:underline">
+                        Request Pro Membership
+                    </a>
+                @else
+                    <a href="#" class="text-sm font-medium text-gray-900 hover:underline">
+                        &#10004; Pro
+                    </a>
+                @endif
+                @endrole
                 <a href="#"
                    class="ml-5 flex-shrink-0 bg-white rounded-full p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
                     <span class="sr-only">View notifications</span>
@@ -100,14 +108,19 @@ Heroicon name: outline/x" x-state:on="Menu open" x-state:off="Menu closed" class
                         <a href="{{route('profile.show')}}"
                            class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Your
                             Profile</a>
-
+                        @role('Editor')
+                        <a href="#"
+                           class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Your
+                            View My Posts</a>
+                        @endrole
                         <a href="#" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100"
                            role="menuitem">Settings</a>
                         <form action="{{route('logout')}}" method="POST">
                             @csrf
                             <button type="submit"
-                           class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Sign
-                            out</button>
+                                    class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Sign
+                                out
+                            </button>
                         </form>
                     </div>
 

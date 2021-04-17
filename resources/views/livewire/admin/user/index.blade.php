@@ -73,4 +73,17 @@
             </div>
         </div>
     </div>
+    <x-jet-confirmation-modal wire:model="confirmingUserRemoval">
+        <x-slot name="title">
+            {{ __('Remove User') }}
+        </x-slot>
+
+        <x-slot name="content">
+            {{ __('Are you sure you would like to remove this user?') }}
+        </x-slot>
+        <x-slot name="footer">
+            <x-jet-secondary-button wire:click="destroy('','yes')">Yes</x-jet-secondary-button>
+            <x-jet-button wire:click="destroy('','no')">No</x-jet-button>
+        </x-slot>
+    </x-jet-confirmation-modal>
 </div>
