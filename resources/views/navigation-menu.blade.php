@@ -130,6 +130,22 @@ Heroicon name: outline/x" x-state:on="Menu open" x-state:off="Menu closed" class
                     New Post
                 </a>
                 @endrole
+                @role('Super Admin')
+                @if(Request::is('admin/*'))
+                    <a href="{{route('dashboard',['from'=>'admin'])}}"
+                       class="ml-6 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium
+                    rounded-md shadow-sm text-white bg-gray-600 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
+                        Dashboard
+                    </a>
+                @else
+                <a href="{{route('admin-dashboard')}}"
+                   class="ml-6 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium
+                    rounded-md shadow-sm text-white bg-gray-600 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
+                    Admin
+                </a>
+                @endif
+                @endrole
+
             </div>
         </div>
     </div>

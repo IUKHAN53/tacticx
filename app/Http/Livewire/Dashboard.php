@@ -7,6 +7,8 @@ use Livewire\Component;
 
 class Dashboard extends Component
 {
+    protected $queryString = ['from'];
+    public $from;
     public $posts;
 
     public function mount(){
@@ -14,7 +16,7 @@ class Dashboard extends Component
     }
     public function render()
     {
-        if(auth()->user()->hasRole('Super Admin')){
+        if(auth()->user()->hasRole('Super Admin') && !$this->from){
             $this->redirect(route('admin-dashboard'));
         }
         return view('dashboard');
