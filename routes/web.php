@@ -2,6 +2,7 @@
 
 use App\Http\Livewire\Dashboard;
 use App\Http\Livewire\Posts\ShowPost;
+use App\Http\Livewire\Posts\ViewPosts;
 use Illuminate\Support\Facades\Route;
 use Laravel\Jetstream\Http\Controllers\Livewire\UserProfileController;
 use App\Http\Livewire\Posts\CreatePost;
@@ -26,6 +27,7 @@ Route::prefix('/')->middleware(['auth:sanctum', 'verified'])->group(function () 
     Route::prefix('/post')->group(function (){
         Route::middleware(['role:Editor|Super Admin'])->group(function(){
             Route::get('/add', CreatePost::class)->name('editor-add-post');
+            Route::get('/my-posts', ViewPosts::class)->name('editor-view-posts');
         });
         Route::get('/{post_id}', ShowPost::class)->name('show-post');
     });

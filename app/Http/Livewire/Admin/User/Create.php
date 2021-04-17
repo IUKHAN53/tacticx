@@ -21,7 +21,6 @@ class Create extends Component
     protected $rules = [
         'name' => 'required|string',
         'role' => 'required',
-        'password' => 'required|confirmed',
         'status' => 'required',
     ];
 
@@ -46,17 +45,19 @@ class Create extends Component
     {
         if ($this->editing) {
             $this->rules['email'] = 'required|email|unique:users,email,' . $this->edit_user->id;
+            $this->rules['password'] = 'sometimes|confirmed';
             $this->validate();
             $user = $this->edit_user;
         } else {
             $this->rules['email'] = 'required|email|unique:users,email';
+            $this->rules['password'] = 'required|confirmed';
             $this->validate();
             $user = new User();
         }
         $user->name = $this->name;
         $user->email = $this->email;
         $user->syncRoles($this->role);
-        $user->status = $this->status;
+        $user->status = ($this->role == 'Editor')?'Pro':$this->status;
         $user->password = bcrypt($this->password);
         $user->save();
         $this->redirect(route('admin-dashboard'));

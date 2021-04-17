@@ -109,8 +109,8 @@ Heroicon name: outline/x" x-state:on="Menu open" x-state:off="Menu closed" class
                            class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Your
                             Profile</a>
                         @role('Editor')
-                        <a href="#"
-                           class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Your
+                        <a href="{{route('editor-view-posts')}}"
+                           class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">
                             View My Posts</a>
                         @endrole
                         <a href="#" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100"
