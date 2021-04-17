@@ -22,7 +22,8 @@ class Dashboard extends Component
 
     public function postDetails(Post $post){
         if($post->type == 'Pro' && auth()->user()->status =='Basic'){
-
+            session()->flash('flash.banner', 'Please upgrade your membership to view this post.!');
+            session()->flash('flash.bannerStyle', 'danger');
         }else{
             $this->redirect(route('show-post',$post));
         }
