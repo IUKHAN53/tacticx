@@ -58,7 +58,7 @@ class Create extends Component
         $user->email = $this->email;
         $user->syncRoles($this->role);
         $user->status = ($this->role == 'Editor')?'Pro':$this->status;
-        $user->password = bcrypt($this->password);
+        $user->password = ($this->password)?bcrypt($this->password):$this->edit_user->password;
         $user->save();
         $this->redirect(route('admin-dashboard'));
     }
