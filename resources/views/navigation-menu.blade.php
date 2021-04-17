@@ -113,8 +113,6 @@ Heroicon name: outline/x" x-state:on="Menu open" x-state:off="Menu closed" class
                            class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">
                             View My Posts</a>
                         @endrole
-                        <a href="#" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100"
-                           role="menuitem">Settings</a>
                         <form action="{{route('logout')}}" method="POST">
                             @csrf
                             <button type="submit"
@@ -125,12 +123,13 @@ Heroicon name: outline/x" x-state:on="Menu open" x-state:off="Menu closed" class
                     </div>
 
                 </div>
-
+                @role('Editor')
                 <a href="{{route('editor-add-post')}}"
                    class="ml-6 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium
                     rounded-md shadow-sm text-white bg-gray-600 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
                     New Post
                 </a>
+                @endrole
             </div>
         </div>
     </div>
@@ -181,9 +180,6 @@ Heroicon name: outline/x" x-state:on="Menu open" x-state:off="Menu closed" class
                 <a href="#"
                    class="block rounded-md py-2 px-3 text-base font-medium text-gray-500 hover:bg-gray-50 hover:text-gray-900">Your
                     Profile</a>
-
-                <a href="#"
-                   class="block rounded-md py-2 px-3 text-base font-medium text-gray-500 hover:bg-gray-50 hover:text-gray-900">Settings</a>
                 <form action="POST" method="{{route('logout')}}">
                     @csrf
                     <button type="submit"
