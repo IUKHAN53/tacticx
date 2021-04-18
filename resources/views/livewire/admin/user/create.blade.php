@@ -32,7 +32,7 @@
                     </div>
                     <div class="sm:col-span-6">
                         <label for="password" class="block text-sm font-medium text-gray-700">
-                            Password (optional: old password will be used)
+                            Password {{($editing)?'(optional: old password will be used)':''}}
                         </label>
                         <div class="mt-1">
                             <input type="password" wire:model="password" id="password" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" placeholder="Type a strong password">
@@ -83,11 +83,14 @@
         </div>
         <div class="pt-5">
             <div class="flex justify-end">
-                <button type="submit" wire:click="addUser"
+                <button type="submit" wire:click="addUser" wire:loading.remove
                         class="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                     {{($editing)?'Update':'Add'}} User
                 </button>
             </div>
+            <a wire:loading wire:target="addUser">
+                Processing...
+            </a>
         </div>
     </div>
 </div>

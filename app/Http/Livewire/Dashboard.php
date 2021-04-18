@@ -4,59 +4,71 @@ namespace App\Http\Livewire;
 
 use App\Models\Post;
 use Livewire\Component;
+use Spatie\Tags\Tag;
 
 class Dashboard extends Component
 {
-    protected $queryString = ['from','q'];
+    protected $queryString = ['from', 'q'];
     public $from;
     public $q;
     public $posts;
-    public $tab='Active';
+    public $tags;
+    public $tab = 'Active';
+    public $selectedTag = [];
 
-    public function mount(){
-        if(isset($this->q)){
+    public function mount()
+    {
+        if (isset($this->q)) {
             request()->flash();
-            $this->posts = Post::search($this->q)->active()->with('comments','tags','user')->get();
-        }else{
-            $this->posts = Post::active()->with('comments','tags','user')->get();
+            $this->posts = Post::search($this->q)->active()->with('comments', 'tags', 'user')->orderBY('published_at','desc')->get();
+        } else {
+            $this->posts = Post::active()->with('comments', 'tags', 'user')->orderBY('published_at','desc')->get();
         }
+        $this->tags = Tag::orderBy('created_at','desc')->take(8)->get();
     }
+
     public function render()
     {
-        if(auth()->user()->hasRole('Super Admin') && !$this->from){
+        if (auth()->user()->hasRole('Super Admin') && !$this->from) {
             $this->redirect(route('admin-dashboard'));
         }
         return view('dashboard');
     }
 
-    public function postDetails(Post $post){
-        if($post->type == 'Pro' && auth()->user()->status =='Basic'){
+    public function postDetails(Post $post)
+    {
+        if ($post->type == 'Pro' && auth()->user()->status == 'Basic') {
             session()->flash('flash.banner', 'Please upgrade your membership to view this post.!');
             session()->flash('flash.bannerStyle', 'danger');
-        }else{
-            $this->redirect(route('show-post',$post));
+        } else {
+            $this->redirect(route('show-post', $post));
         }
     }
 
-    public function setTab($tabName){
+    public function setTab($tabName)
+    {
         $this->tab = $tabName;
-        if(isset($this->q)){
-            if($tabName=='Active'){
-                $this->posts = Post::search($this->q)->active()->with('comments','tags','user')->get();
-            }elseif($tabName=='Closed'){
-                $this->posts = Post::search($this->q)->closed()->with('comments','tags','user')->get();
-            }elseif($tabName=='Cancelled'){
-                $this->posts = Post::search($this->q)->cancelled()->with('comments','tags','user')->get();
-            }
-        }else{
-            if($tabName=='Active'){
-                $this->posts = Post::active()->with('comments','tags','user')->get();
-            }elseif($tabName=='Closed'){
-                $this->posts = Post::closed()->with('comments','tags','user')->get();
-            }elseif($tabName=='Cancelled'){
-                $this->posts = Post::cancelled()->with('comments','tags','user')->get();
-            }
+        $post = Post::with('comments', 'tags', 'user');
+        if (isset($this->q)) {
+            $post = $post->search($this->q);
         }
-
+        if ($this->selectedTag) {
+            $post = $post->withAnyTags([$this->selectedTag]);
+        }
+        if ($tabName == 'Active') {
+            $post = $post->active();
+        } elseif ($tabName == 'Closed') {
+            $post = $post->closed();
+        } elseif ($tabName == 'Cancelled') {
+            $post = $post->cancelled();
+        }
+        $this->posts = $post->with(['comments','tags', 'user'])->orderBY('published_at','desc')->get();
     }
+
+    public function filterByTag(Tag $tag)
+    {
+        $this->selectedTag = ($this->selectedTag == $tag)?[]:$tag;
+        $this->setTab($this->tab);
+    }
+
 }

@@ -25,7 +25,11 @@ class ShowPost extends Component
 
     public function render()
     {
-        return view('livewire.posts.show-post');
+        if(auth()->user()->status == 'Basic' && $this->post->type == 'Pro'){
+            abort(403);
+        }else{
+            return view('livewire.posts.show-post');
+        }
     }
 
     public function postComment(){

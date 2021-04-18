@@ -69,62 +69,17 @@
                 Recent Tags
             </p>
             <div class="mt-3 space-y-2" aria-labelledby="communities-headline">
-
-                <a href="#"
-                    class="group flex items-center px-3 py-2 text-sm font-medium text-gray-600 rounded-md hover:text-gray-900 hover:bg-gray-50">
+                @forelse($tags as $tag)
+                <a href="#" wire:click="filterByTag('{{$tag->id}}')"
+                    class="group flex items-center px-3 {{($selectedTag==$tag)?'bg-gray-400 text-white ':'text-gray-600'}}
+                    py-2 text-sm font-medium rounded-md">
                     <span class="truncate">
-                        Education
+                        {{$tag->name}}
                     </span>
                 </a>
-
-                <a href="#"
-                    class="group flex items-center px-3 py-2 text-sm font-medium text-gray-600 rounded-md hover:text-gray-900 hover:bg-gray-50">
-                    <span class="truncate">
-                        Scalping
-                    </span>
-                </a>
-
-                <a href="#"
-                    class="group flex items-center px-3 py-2 text-sm font-medium text-gray-600 rounded-md hover:text-gray-900 hover:bg-gray-50">
-                    <span class="truncate">
-                        Web 3.0
-                    </span>
-                </a>
-
-                <a href="#"
-                    class="group flex items-center px-3 py-2 text-sm font-medium text-gray-600 rounded-md hover:text-gray-900 hover:bg-gray-50">
-                    <span class="truncate">
-                        Chart Pattern
-                    </span>
-                </a>
-
-                <a href="#"
-                    class="group flex items-center px-3 py-2 text-sm font-medium text-gray-600 rounded-md hover:text-gray-900 hover:bg-gray-50">
-                    <span class="truncate">
-                        Elon Musk
-                    </span>
-                </a>
-
-                <a href="#"
-                    class="group flex items-center px-3 py-2 text-sm font-medium text-gray-600 rounded-md hover:text-gray-900 hover:bg-gray-50">
-                    <span class="truncate">
-                        Web 4.0
-                    </span>
-                </a>
-
-                <a href="#"
-                    class="group flex items-center px-3 py-2 text-sm font-medium text-gray-600 rounded-md hover:text-gray-900 hover:bg-gray-50">
-                    <span class="truncate">
-                        Elliot Waves
-                    </span>
-                </a>
-
-                <a href="#"
-                    class="group flex items-center px-3 py-2 text-sm font-medium text-gray-600 rounded-md hover:text-gray-900 hover:bg-gray-50">
-                    <span class="truncate">
-                        Candle Patterns
-                    </span>
-                </a>
+                @empty
+                    <p>No recent tags</p>
+                @endforelse
 
             </div>
         </div>

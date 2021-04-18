@@ -74,8 +74,12 @@ Heroicon name: outline/x" x-state:on="Menu open" x-state:off="Menu closed" class
             <div class="hidden lg:flex lg:items-center lg:justify-end xl:col-span-4">
                 @role('Member')
                 @if(auth()->user()->status == 'Basic')
-                    <a href="#" class="text-sm font-medium text-gray-900 hover:underline">
+                    <a href="#" wire:click="requestPro" wire:loading.remove
+                       class="text-sm font-medium text-gray-900 hover:underline">
                         Request Pro Membership
+                    </a>
+                    <a wire:loading wire:target="requestPro">
+                        Processing...
                     </a>
                 @else
                     <a href="#" class="text-sm font-medium text-gray-900 hover:underline">
@@ -218,4 +222,23 @@ Heroicon name: outline/x" x-state:on="Menu open" x-state:off="Menu closed" class
             </div>
         </div>
     </nav>
+    <x-jet-modal wire:model="requestProModal">
+        <slot>
+            <div class="bg-white rounded-lg shadow">
+                <div class="p-6">
+                    <h1 class="text-xl font-semibold text-gray-900">Request Pro Successful</h1>
+                    <h2 id="who-to-follow-heading" class="text-base font-medium text-gray-900">
+                        An Email has been sent to admin containing a request for becoming a pro member. Please hold tight while Admin reviews your request.
+                    </h2>
+                    <div class="mt-6">
+                        <a href="#" wire:click="$toggle('requestProModal')"
+                           class="w-full block text-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
+                            Ok
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </slot>
+    </x-jet-modal>
 </header>

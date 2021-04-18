@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\UserController;
 use App\Http\Livewire\Dashboard;
 use App\Http\Livewire\Posts\ShowPost;
 use App\Http\Livewire\Posts\ViewPosts;

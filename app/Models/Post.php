@@ -48,9 +48,11 @@ class Post extends Model
         return $query->whereIn('status', ['Cancelled']);
     }
 
-    public function scopeSearch($query, $term){
-        return $query->whereHas('pair', function($q) use($term){
-            $q->where('name', 'like' , '%'.$term.'%');
+    public function scopeSearch($query, $term)
+    {
+        return $query->whereHas('pair', function ($q) use ($term) {
+            $q->where('name', 'like', '%' . $term . '%');
         });
     }
+
 }
