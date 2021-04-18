@@ -3,10 +3,10 @@
         <div class="pb-8 space-y-1">
 
             <a href="#"
-               class="{{(Route::is('post/*')?'bg-gray-200 text-gray-900':'text-gray-600')}}  group flex items-center px-3 py-2 text-sm font-medium rounded-md"
+               class="{{(Request::is('post/*')?'text-gray-600':'bg-gray-200 text-gray-900')}}  group flex items-center px-3 py-2 text-sm font-medium rounded-md"
                aria-current="page" x-state:on="Current" x-state:off="Default"
                x-state-description="Current: &quot;bg-gray-200 text-gray-900&quot;, Default: &quot;text-gray-600 hover:bg-gray-50&quot;">
-                <svg class="{{(Route::is('post/*')?'text-gray-400':'text-gray-500')}} flex-shrink-0 -ml-1 mr-3 h-6 w-6" x-description="Heroicon name: outline/home"
+                <svg class="{{(Request::is('post/*')?'text-gray-400':'text-gray-500')}} flex-shrink-0 -ml-1 mr-3 h-6 w-6" x-description="Heroicon name: outline/home"
                      xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
                      aria-hidden="true">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -64,7 +64,7 @@
             </a>
 
         </div>
-        @if(Route::is('post/*'))
+        @if(!(Request::is('post/*')))
             <div class="pt-10">
                 <p class="px-3 text-xs font-semibold text-gray-500 uppercase tracking-wider" id="communities-headline">
                     Recent Tags
