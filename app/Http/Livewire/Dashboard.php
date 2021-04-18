@@ -10,9 +10,11 @@ class Dashboard extends Component
     protected $queryString = ['from'];
     public $from;
     public $posts;
+    public $tab='Active';
 
     public function mount(){
-        $this->posts = Post::with('comments','tags','user')->get();
+
+        $this->posts = Post::active()->with('comments','tags','user')->get();
     }
     public function render()
     {
@@ -28,6 +30,17 @@ class Dashboard extends Component
             session()->flash('flash.bannerStyle', 'danger');
         }else{
             $this->redirect(route('show-post',$post));
+        }
+    }
+
+    public function setTab($tabName){
+        $this->tab = $tabName;
+        if($tabName=='Active'){
+            $this->posts = Post::active()->with('comments','tags','user')->get();
+        }elseif($tabName=='Closed'){
+            $this->posts = Post::closed()->with('comments','tags','user')->get();
+        }elseif($tabName=='Cancelled'){
+            $this->posts = Post::cancelled()->with('comments','tags','user')->get();
         }
     }
 }

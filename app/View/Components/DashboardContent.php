@@ -7,9 +7,12 @@ use Illuminate\View\Component;
 class DashboardContent extends Component
 {
     public $posts;
-    public function __construct($posts)
+    public $tab;
+
+    public function __construct($posts, $tab)
     {
         $this->posts = $posts;
+        $this->tab = $tab;
     }
 
     public function render()

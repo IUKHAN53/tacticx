@@ -31,4 +31,16 @@ class Post extends Model
     {
         return $this->hasMany(Comment::class);
     }
+public function scopeActive($query)
+    {
+        return $query->whereIn('status',['Active']);
+    }
+public function scopeClosed($query)
+    {
+        return $query->whereIn('status',['Closed Manually','Closed Target Reached']);
+    }
+public function scopeCancelled($query)
+    {
+        return $query->whereIn('status',['Cancelled']);
+    }
 }
