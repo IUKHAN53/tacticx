@@ -6,6 +6,7 @@ use App\Models\Comment;
 use App\Models\Post;
 use App\Models\Reply;
 use Livewire\Component;
+use Spatie\Tags\Tag;
 
 class ShowPost extends Component
 {
@@ -17,8 +18,12 @@ class ShowPost extends Component
     public $comment_text;
     public $reply_text;
     public $selected_comment;
+    public $tags;
+    public $selectedTag = [];
+
 
     public function mount(){
+        $this->tags = Tag::orderBy('created_at','desc')->take(8)->get();
         $this->post = Post::with('comments','tags','user')->findOrFail($this->post_id);
         $this->comments = $this->post->comments;
     }

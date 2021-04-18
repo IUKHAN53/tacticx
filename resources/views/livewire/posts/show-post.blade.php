@@ -1,8 +1,8 @@
 <div>
     <x-post-breadcrumb/>
     <div class="py-10">
-        <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
-{{--            <x-dashboard-leftside/>--}}
+        <div class="max-w-3xl mx-auto sm:px-6 lg:max-w-7xl lg:px-8 lg:grid lg:grid-cols-12 lg:gap-8">
+            <x-dashboard-leftside :tags="$tags" :selectedTag="$selectedTag"/>
             <main class="lg:col-span-9 xl:col-span-6">
                 <div>
                     <ul class="space-y-4" x-max="1">
@@ -33,10 +33,12 @@
                                                 <div>
                                                     <button type="button"
                                                             class="-m-2 p-2 rounded-full flex items-center text-gray-400 hover:text-gray-600"
-                                                            id="options-menu-0" @click="open = !open" aria-haspopup="true"
+                                                            id="options-menu-0" @click="open = !open"
+                                                            aria-haspopup="true"
                                                             x-bind:aria-expanded="open">
                                                         <span class="sr-only">Open options</span>
-                                                        <svg class="h-5 w-5" x-description="Heroicon name: solid/dots-vertical"
+                                                        <svg class="h-5 w-5"
+                                                             x-description="Heroicon name: solid/dots-vertical"
                                                              xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
                                                              fill="currentColor" aria-hidden="true">
                                                             <path
@@ -47,7 +49,8 @@
                                                 </div>
 
 
-                                                <div x-show="open" x-description="Dropdown menu, show/hide based on menu state."
+                                                <div x-show="open"
+                                                     x-description="Dropdown menu, show/hide based on menu state."
                                                      x-transition:enter="transition ease-out duration-100"
                                                      x-transition:enter-start="transform opacity-0 scale-95"
                                                      x-transition:enter-end="transform opacity-100 scale-100"
@@ -55,13 +58,15 @@
                                                      x-transition:leave-start="transform opacity-100 scale-100"
                                                      x-transition:leave-end="transform opacity-0 scale-95"
                                                      class="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
-                                                     role="menu" aria-orientation="vertical" aria-labelledby="options-menu-0"
+                                                     role="menu" aria-orientation="vertical"
+                                                     aria-labelledby="options-menu-0"
                                                      style="display: none;">
                                                     <div class="py-1" role="none">
                                                         <a href="#"
                                                            class="flex px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
                                                            role="menuitem">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
+                                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6"
+                                                                 fill="none"
                                                                  viewBox="0 0 24 24" stroke="currentColor">
                                                                 <path stroke-linecap="round" stroke-linejoin="round"
                                                                       stroke-width="2"
@@ -84,7 +89,8 @@
                                         <img src="{{$post->image_link}}" alt="" class="rounded">
                                     </div>
                                 @endif
-                                <div class="py-6 my-2 border-t border-b border-gray-200 text-sm text-gray-700 space-y-4 ">
+                                <div
+                                    class="py-6 my-2 border-t border-b border-gray-200 text-sm text-gray-700 space-y-4 ">
 
                                     <p>
                                         {!! $post->description !!}
@@ -133,11 +139,13 @@
                                                 <li class="inline">
                                                     <a href="#"
                                                        class="relative inline-flex items-center rounded-full border border-gray-300 px-3 py-0.5">
-                                                        <div class="absolute flex-shrink-0 flex items-center justify-center">
+                                                        <div
+                                                            class="absolute flex-shrink-0 flex items-center justify-center">
                                             <span class="h-1.5 w-1.5 rounded-full bg-indigo-500"
                                                   aria-hidden="true"></span>
                                                         </div>
-                                                        <div class="ml-3.5 text-sm font-medium text-gray-900">{{$tag->name}}</div>
+                                                        <div
+                                                            class="ml-3.5 text-sm font-medium text-gray-900">{{$tag->name}}</div>
                                                     </a>
                                                     <!-- space -->
                                                 </li>
@@ -209,22 +217,27 @@
                                         <li>
                                             <div class="flex space-x-3">
                                                 <div class="flex-shrink-0">
-                                                    <img class="h-10 w-10 rounded-full" src="{{$comment->user->profile_photo_url}}" alt="">
+                                                    <img class="h-10 w-10 rounded-full"
+                                                         src="{{$comment->user->profile_photo_url}}" alt="">
                                                 </div>
                                                 <div>
                                                     <div class="text-sm">
-                                                        <a href="#" class="font-medium text-gray-900">{{$comment->user->name}}</a>
+                                                        <a href="#"
+                                                           class="font-medium text-gray-900">{{$comment->user->name}}</a>
                                                     </div>
                                                     <div class="mt-1 text-sm text-gray-700">
                                                         <p>{{$comment->comment}}</p>
                                                     </div>
                                                     <div class="mt-2 text-sm space-x-2">
-                                                        <span class="text-gray-500 font-medium">{{$comment->created_at->diffForHumans()}}</span>
+                                                            <span
+                                                                class="text-gray-500 font-medium">{{$comment->created_at->diffForHumans()}}</span>
                                                         <!-- space -->
                                                         <span class="text-gray-500 font-medium">·</span>
                                                         <!-- space -->
-                                                        <button type="button" wire:click="getReplies({{$comment->id}})"
-                                                                class="text-gray-900 font-medium">&#9993; {{$comment->replies->count()}} | Reply
+                                                        <button type="button"
+                                                                wire:click="getReplies({{$comment->id}})"
+                                                                class="text-gray-900 font-medium">
+                                                            &#9993; {{$comment->replies->count()}} | Reply
                                                         </button>
                                                     </div>
                                                 </div>
@@ -232,7 +245,8 @@
                                         </li>
                                     @empty
                                         <li>
-                                            <span class="text-gray-500 font-medium">No Comments on this post yet</span>
+                                                <span
+                                                    class="text-gray-500 font-medium">No Comments on this post yet</span>
                                         </li>
                                     @endforelse
                                 </ul>
@@ -241,7 +255,8 @@
                         <div class="bg-gray-50 px-4 py-6 sm:px-6">
                             <div class="flex space-x-3">
                                 <div class="flex-shrink-0">
-                                    <img class="h-10 w-10 rounded-full" src="{{auth()->user()->profile_photo_url}}" alt="">
+                                    <img class="h-10 w-10 rounded-full" src="{{auth()->user()->profile_photo_url}}"
+                                         alt="">
                                 </div>
                                 <div class="min-w-0 flex-1">
                                     <div>
@@ -263,7 +278,7 @@
                     </div>
                 </div>
             </main>
-            {{--            <x-post-rightside/>--}}
+            <x-post-rightside/>
         </div>
     </div>
     <x-jet-modal wire:model="replyModal">
@@ -279,7 +294,8 @@
                                 <li>
                                     <div class="flex space-x-3">
                                         <div class="flex-shrink-0">
-                                            <img class="h-10 w-10 rounded-full" src="{{$reply->user->profile_photo_url}}" alt="">
+                                            <img class="h-10 w-10 rounded-full"
+                                                 src="{{$reply->user->profile_photo_url}}" alt="">
                                         </div>
                                         <div>
                                             <div class="text-sm">
@@ -289,7 +305,8 @@
                                                 <p>{{$reply->reply}}</p>
                                             </div>
                                             <div class="mt-2 text-sm space-x-2">
-                                                <span class="text-gray-500 font-medium">{{$reply->created_at->diffForHumans()}}</span>
+                                                <span
+                                                    class="text-gray-500 font-medium">{{$reply->created_at->diffForHumans()}}</span>
                                             </div>
                                         </div>
                                     </div>

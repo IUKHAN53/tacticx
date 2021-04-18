@@ -48,6 +48,14 @@ class Post extends Model
         return $query->whereIn('status', ['Cancelled']);
     }
 
+    public function scopeTrending($query)
+    {
+        return $query->with('comments')->get()->sortByDesc(function($q)
+        {
+            return $q->comments->count();
+        })->take(5);
+    }
+
     public function scopeSearch($query, $term)
     {
         return $query->whereHas('pair', function ($q) use ($term) {

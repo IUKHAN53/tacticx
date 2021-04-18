@@ -18,6 +18,7 @@ class Dashboard extends Component
 
     public function mount()
     {
+
         if (isset($this->q)) {
             request()->flash();
             $this->posts = Post::search($this->q)->active()->with('comments', 'tags', 'user')->orderBY('published_at','desc')->get();

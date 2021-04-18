@@ -2,18 +2,15 @@
 
 namespace App\View\Components;
 
+use App\Models\Post;
 use Illuminate\View\Component;
 
 class DashboardRightside extends Component
 {
-    /**
-     * Create a new component instance.
-     *
-     * @return void
-     */
+    public $trendingPosts;
     public function __construct()
     {
-        //
+        $this->trendingPosts = Post::trending();
     }
 
     /**
