@@ -31,9 +31,9 @@ class PostObserver
      */
     public function updated(Post $post)
     {
-        $members = User::role('Member')->get();
+        $members = $post->subscriptions;
         foreach ($members as $member){
-            $member->notify(new PostModifiedNotification($post));
+            $member->user->notify(new PostModifiedNotification($post));
         }
     }
 
