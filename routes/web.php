@@ -32,5 +32,5 @@ Route::prefix('/')->middleware(['auth:sanctum', 'verified'])->group(function () 
         });
         Route::get('/{post_id}', ShowPost::class)->name('show-post');
     });
-    Route::get('page/{slug}', 'GeneralController@page');
 });
+Route::get('page/{slug}', [\App\Http\Controllers\GeneralController::class,'page']);

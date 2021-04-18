@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\StaticPages;
+use App\Models\StaticPage;
 use Illuminate\Http\Request;
 
 class GeneralController extends Controller
 {
     public function page($slug)
     {
-        $pageContent = StaticPages::where('slug', $slug)->where('status', 1)->first();
+        $pageContent = StaticPage::where('slug', $slug)->first();
         if($pageContent){
-            return view('static_page')->with('data',$pageContent);
+            return view('static_page')->with('pageContent',$pageContent);
         }else{
             return abort(404);
         }
