@@ -109,18 +109,19 @@
                                 </div>
                             </div>
                             <h2 id="question-title-81614" class="mt-4 text-base font-medium text-gray-900">
-                                    <span
-                                        class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
-                                        {{$post->pair->name}}
-                                    </span>
-                                <span
-                                    class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
-                                        {{strtoupper(implode(', ',$post->tags->pluck('name')->toArray()))}}
+                                <span class="font-semibold">
+                                    {{$post->pair->name}}
                                 </span>
-                                <span
-                                    class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
-                                        {{$post->strategy}}
+                                @foreach($post->tags->pluck('name') as $tag)
+                                    <span
+                                        class="inline-flex items-center px-3 py-0.5 rounded-full bg-gray-50 text-sm font-medium text-gray-700 hover:bg-gray-100">
+                                        {{$tag}}
                                     </span>
+                                @endforeach
+                                <span
+                                    class="inline-flex items-center px-3 py-0.5 rounded-full bg-green-50 text-sm font-medium text-green-700 hover:bg-green-100">
+                                    {{$post->timeframe}}
+                                </span>
                             </h2>
                         </div>
                         <div class="mt-2 text-sm text-gray-700 space-y-4">
