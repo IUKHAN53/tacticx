@@ -27,9 +27,21 @@
                                           clip-rule="evenodd"></path>
                                 </svg>
                             </div>
-                            <input id="search" name="search"
-                                   class="block w-full bg-white border border-gray-300 rounded-md py-2 pl-10 pr-3 text-sm placeholder-gray-500 focus:outline-none focus:text-gray-900 focus:placeholder-gray-400 focus:ring-1 focus:ring-gray-500 focus:border-gray-500 sm:text-sm"
-                                   placeholder="Search" type="search">
+
+                            <form action="{{route('dashboard')}}" method="GET">
+                                @role('Super Admin')
+                                <input type="text" name="from" value="admin" hidden>
+                                @endrole
+                                <input id="q" name="q" value="{{old('q')}}"
+                                       class="block w-full bg-white border border-gray-300 rounded-md py-2 pl-10
+                                                pr-3 text-sm placeholder-gray-500 focus:outline-none focus:text-gray-900
+                                                 focus:placeholder-gray-400 focus:ring-1 focus:ring-gray-500
+                                                 focus:border-gray-500 sm:text-sm"
+                                       placeholder="Search" type="search">
+                                <input type="submit"
+                                       style="position: absolute; left: -9999px; width: 1px; height: 1px;"
+                                       tabindex="-1"/>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -138,18 +150,17 @@ Heroicon name: outline/x" x-state:on="Menu open" x-state:off="Menu closed" class
                         Dashboard
                     </a>
                 @else
-                <a href="{{route('admin-dashboard')}}"
-                   class="ml-6 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium
+                    <a href="{{route('admin-dashboard')}}"
+                       class="ml-6 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium
                     rounded-md shadow-sm text-white bg-gray-600 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
-                    Admin
-                </a>
+                        Admin
+                    </a>
                 @endif
                 @endrole
 
             </div>
         </div>
     </div>
-
     <nav x-description="Mobile menu, show/hide based on menu state." class="lg:hidden" aria-label="Global" x-ref="panel"
          x-show="open" @click.away="open = false" style="display: none;">
         <div class="max-w-3xl mx-auto px-2 pt-2 pb-3 space-y-1 sm:px-4">

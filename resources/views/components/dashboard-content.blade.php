@@ -18,22 +18,25 @@
                 <a href="#" wire:click="setTab('Active')"
                    class="text-gray-900 rounded-l-lg  group relative min-w-0 flex-1 overflow-hidden bg-white py-4 px-6
                    text-sm font-medium text-center hover:bg-gray-50 focus:z-10"
-                    <span>Active</span>
-                    <span aria-hidden="true" class="{{$tab == 'Active'?'bg-gray-500':'bg-transparent'}} absolute inset-x-0 bottom-0 h-0.5"></span>
+                <span>Active</span>
+                <span aria-hidden="true"
+                      class="{{$tab == 'Active'?'bg-gray-500':'bg-transparent'}} absolute inset-x-0 bottom-0 h-0.5"></span>
                 </a>
 
                 <a href="#" wire:click="setTab('Closed')"
                    class="text-gray-500 hover:text-gray-700   group relative min-w-0 flex-1 overflow-hidden
                    bg-white py-4 px-6 text-sm font-medium text-center hover:bg-gray-50 focus:z-10"
-                    <span>Closed</span>
-                    <span aria-hidden="true" class="{{$tab == 'Closed'?'bg-gray-500':'bg-transparent'}} absolute inset-x-0 bottom-0 h-0.5"></span>
+                <span>Closed</span>
+                <span aria-hidden="true"
+                      class="{{$tab == 'Closed'?'bg-gray-500':'bg-transparent'}} absolute inset-x-0 bottom-0 h-0.5"></span>
                 </a>
 
                 <a href="#" wire:click="setTab('Cancelled')"
                    class="text-gray-500 hover:text-gray-700  rounded-r-lg group relative min-w-0 flex-1
                    overflow-hidden bg-white py-4 px-6 text-sm font-medium text-center hover:bg-gray-50 focus:z-10"
-                    <span>Cancelled</span>
-                    <span aria-hidden="true" class="{{$tab == 'Cancelled'?'bg-gray-500':'bg-transparent'}} absolute inset-x-0 bottom-0 h-0.5"></span>
+                <span>Cancelled</span>
+                <span aria-hidden="true"
+                      class="{{$tab == 'Cancelled'?'bg-gray-500':'bg-transparent'}} absolute inset-x-0 bottom-0 h-0.5"></span>
                 </a>
             </nav>
         </div>
@@ -110,7 +113,8 @@
                                         class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
                                         {{$post->pair->name}}
                                     </span>
-                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
+                                <span
+                                    class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
                                         {{strtoupper(implode(', ',$post->tags->pluck('name')->toArray()))}}
                                 </span>
                                 <span

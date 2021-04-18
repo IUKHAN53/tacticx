@@ -22,6 +22,7 @@ class Post extends Model
     {
         return $this->belongsTo(User::class);
     }
+
     public function pair()
     {
         return $this->belongsTo(Pair::class);
@@ -31,16 +32,25 @@ class Post extends Model
     {
         return $this->hasMany(Comment::class);
     }
-public function scopeActive($query)
+
+    public function scopeActive($query)
     {
-        return $query->whereIn('status',['Active']);
+        return $query->whereIn('status', ['Active']);
     }
-public function scopeClosed($query)
+
+    public function scopeClosed($query)
     {
-        return $query->whereIn('status',['Closed Manually','Closed Target Reached']);
+        return $query->whereIn('status', ['Closed Manually', 'Closed Target Reached']);
     }
-public function scopeCancelled($query)
+
+    public function scopeCancelled($query)
     {
-        return $query->whereIn('status',['Cancelled']);
+        return $query->whereIn('status', ['Cancelled']);
+    }
+
+    public function scopeSearch($query, $term){
+        return $query->whereHas('pair', function($q) use($term){
+            $q->where('name', 'like' , '%'.$term.'%');
+        });
     }
 }

@@ -7,14 +7,19 @@ use Livewire\Component;
 
 class Dashboard extends Component
 {
-    protected $queryString = ['from'];
+    protected $queryString = ['from','q'];
     public $from;
+    public $q;
     public $posts;
     public $tab='Active';
 
     public function mount(){
-
-        $this->posts = Post::active()->with('comments','tags','user')->get();
+        if(isset($this->q)){
+            request()->flash();
+            $this->posts = Post::search($this->q)->active()->with('comments','tags','user')->get();
+        }else{
+            $this->posts = Post::active()->with('comments','tags','user')->get();
+        }
     }
     public function render()
     {
@@ -35,12 +40,23 @@ class Dashboard extends Component
 
     public function setTab($tabName){
         $this->tab = $tabName;
-        if($tabName=='Active'){
-            $this->posts = Post::active()->with('comments','tags','user')->get();
-        }elseif($tabName=='Closed'){
-            $this->posts = Post::closed()->with('comments','tags','user')->get();
-        }elseif($tabName=='Cancelled'){
-            $this->posts = Post::cancelled()->with('comments','tags','user')->get();
+        if(isset($this->q)){
+            if($tabName=='Active'){
+                $this->posts = Post::search($this->q)->active()->with('comments','tags','user')->get();
+            }elseif($tabName=='Closed'){
+                $this->posts = Post::search($this->q)->closed()->with('comments','tags','user')->get();
+            }elseif($tabName=='Cancelled'){
+                $this->posts = Post::search($this->q)->cancelled()->with('comments','tags','user')->get();
+            }
+        }else{
+            if($tabName=='Active'){
+                $this->posts = Post::active()->with('comments','tags','user')->get();
+            }elseif($tabName=='Closed'){
+                $this->posts = Post::closed()->with('comments','tags','user')->get();
+            }elseif($tabName=='Cancelled'){
+                $this->posts = Post::cancelled()->with('comments','tags','user')->get();
+            }
         }
+
     }
 }
