@@ -1,7 +1,4 @@
-<header class="bg-white shadow-sm lg:static lg:overflow-y-visible" x-state:on="Menu open" x-state:off="Menu closed"
-        :class="{ 'fixed inset-0 z-40 overflow-y-auto': open }"
-        x-data="Components.popover({ open: false, focus: false })"
-        x-init="init()" @keydown.escape="onEscape" @close-popover-group.window="onClosePopoverGroup">
+<header class="bg-white shadow-sm lg:static lg:overflow-y-visible">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="relative flex justify-between xl:grid xl:grid-cols-12 lg:gap-8">
             <div class="flex md:absolute md:left-0 md:inset-y-0 lg:static xl:col-span-2">
@@ -47,30 +44,36 @@
                 </div>
             </div>
             <div class="flex items-center md:absolute md:right-0 md:inset-y-0 lg:hidden">
-                <!-- Mobile menu button -->
                 <button type="button"
-                        class="-mx-2 rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-gray-500"
-                        @click="toggle" @mousedown="if (open) $event.preventDefault()" aria-expanded="false"
-                        :aria-expanded="open.toString()">
+                        class="-mx-2 rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
+                        aria-expanded="false">
                     <span class="sr-only">Open menu</span>
-                    <svg x-description="Icon when menu is closed.
+                    <!--
+                      Icon when menu is closed.
 
-Heroicon name: outline/menu" x-state:on="Menu open" x-state:off="Menu closed" class="block h-6 w-6"
-                         :class="{ 'hidden': open, 'block': !(open) }" xmlns="http://www.w3.org/2000/svg" fill="none"
-                         viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                      Heroicon name: outline/menu
+
+                      Menu open: "hidden", Menu closed: "block"
+                    -->
+                    <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                         stroke="currentColor" aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                              d="M4 6h16M4 12h16M4 18h16"></path>
+                              d="M4 6h16M4 12h16M4 18h16"/>
                     </svg>
-                    <svg x-description="Icon when menu is open.
+                    <!--
+                      Icon when menu is open.
 
-Heroicon name: outline/x" x-state:on="Menu open" x-state:off="Menu closed" class="hidden h-6 w-6"
-                         :class="{ 'block': open, 'hidden': !(open) }" xmlns="http://www.w3.org/2000/svg" fill="none"
-                         viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
-                        </path>
+                      Heroicon name: outline/x
+
+                      Menu open: "block", Menu closed: "hidden"
+                    -->
+                    <svg class="hidden h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                         stroke="currentColor" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
                     </svg>
                 </button>
             </div>
+
             <div class="hidden lg:flex lg:items-center lg:justify-end xl:col-span-4">
                 @role('Member')
                 @if(auth()->user()->status == 'Basic')
@@ -165,70 +168,62 @@ Heroicon name: outline/x" x-state:on="Menu open" x-state:off="Menu closed" class
             </div>
         </div>
     </div>
-    <nav x-description="Mobile menu, show/hide based on menu state." class="lg:hidden" aria-label="Global" x-ref="panel"
-         x-show="open" @click.away="open = false" style="display: none;">
+    <nav class="lg:hidden" aria-label="Global">
         <div class="max-w-3xl mx-auto px-2 pt-2 pb-3 space-y-1 sm:px-4">
-
-            <a href="#" aria-current="page"
-               class="bg-gray-100 text-gray-900 block rounded-md py-2 px-3 text-base font-medium text-gray-900"
-               x-state:on="Current" x-state:off="Default"
-               x-state-description="Current: &quot;bg-gray-100 text-gray-900&quot;, Default: &quot;hover:bg-gray-50&quot;">Home</a>
-
-            <a href="#" class="hover:bg-gray-50 block rounded-md py-2 px-3 text-base font-medium text-gray-900"
-               x-state-description="undefined: &quot;bg-gray-100 text-gray-900&quot;, undefined: &quot;hover:bg-gray-50&quot;">Popular</a>
-
-            <a href="#" class="hover:bg-gray-50 block rounded-md py-2 px-3 text-base font-medium text-gray-900"
-               x-state-description="undefined: &quot;bg-gray-100 text-gray-900&quot;, undefined: &quot;hover:bg-gray-50&quot;">Communities</a>
-
-            <a href="#" class="hover:bg-gray-50 block rounded-md py-2 px-3 text-base font-medium text-gray-900"
-               x-state-description="undefined: &quot;bg-gray-100 text-gray-900&quot;, undefined: &quot;hover:bg-gray-50&quot;">Trending</a>
-
+            <!-- Current: "bg-gray-100 text-gray-900", Default: "hover:bg-gray-50" -->
+            <a href="{{route('dashboard')}}" aria-current="page"
+               class="bg-gray-100 text-gray-900 block rounded-md py-2 px-3 text-base font-medium text-gray-900">Dashboard</a>
         </div>
         <div class="border-t border-gray-200 pt-4 pb-3">
             <div class="max-w-3xl mx-auto px-4 flex items-center sm:px-6">
                 <div class="flex-shrink-0">
-                    <img class="h-10 w-10 rounded-full"
-                         src="https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&amp;ixqx=FLYCBl6NlW&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=2&amp;w=256&amp;h=256&amp;q=80"
-                         alt="">
+                    <img class="h-10 w-10 rounded-full" src="{{auth()->user()->profile_photo_url}}" alt="">
                 </div>
                 <div class="ml-3">
-                    <div class="text-base font-medium text-gray-800">Chelsea Hagon</div>
-                    <div class="text-sm font-medium text-gray-500">chelseahagon@example.com</div>
+                    <div class="text-base font-medium text-gray-800">{{auth()->user()->name}}</div>
+                    <div class="text-sm font-medium text-gray-500">{{auth()->user()->email}}</div>
                 </div>
                 <button type="button"
-                        class="ml-auto flex-shrink-0 bg-white rounded-full p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
+                        class="ml-auto flex-shrink-0 bg-white rounded-full p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                     <span class="sr-only">View notifications</span>
-                    <svg class="h-6 w-6" x-description="Heroicon name: outline/bell" xmlns="http://www.w3.org/2000/svg"
-                         fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                    <!-- Heroicon name: outline/bell -->
+                    <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                         stroke="currentColor" aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                              d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9">
-                        </path>
+                              d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/>
                     </svg>
                 </button>
             </div>
             <div class="mt-3 max-w-3xl mx-auto px-2 space-y-1 sm:px-4">
-
-                <a href="#"
+                <a href="{{route('profile.show')}}"
                    class="block rounded-md py-2 px-3 text-base font-medium text-gray-500 hover:bg-gray-50 hover:text-gray-900">Your
                     Profile</a>
-                <form action="POST" method="{{route('logout')}}">
+                @role('Editor')
+                <a href="{{route('editor-view-posts')}}"
+                   class="block rounded-md py-2 px-3 text-base font-medium text-gray-500 hover:bg-gray-50 hover:text-gray-900">
+                    View My Posts</a>
+                @endrole
+                <form action="{{route('logout')}}" method="POST">
                     @csrf
                     <button type="submit"
                             class="block rounded-md py-2 px-3 text-base font-medium text-gray-500 hover:bg-gray-50 hover:text-gray-900">
-                        Sign
-                        out
+                        Sign out
                     </button>
                 </form>
+
             </div>
         </div>
     </nav>
+
+
     <x-jet-modal wire:model="requestProModal">
         <slot>
             <div class="bg-white rounded-lg shadow">
                 <div class="p-6">
                     <h1 class="text-xl font-semibold text-gray-900">Request Pro Successful</h1>
                     <h2 id="who-to-follow-heading" class="text-base font-medium text-gray-900">
-                        An Email has been sent to admin containing a request for becoming a pro member. Please hold tight while Admin reviews your request.
+                        An Email has been sent to admin containing a request for becoming a pro member. Please hold
+                        tight while Admin reviews your request.
                     </h2>
                     <div class="mt-6">
                         <a href="#" wire:click="$toggle('requestProModal')"
