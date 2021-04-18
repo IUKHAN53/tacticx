@@ -33,6 +33,11 @@ class Post extends Model
         return $this->hasMany(Comment::class);
     }
 
+    public function subscriptions()
+    {
+        return $this->hasMany(UserPostsSubscriptions::class);
+    }
+
     public function scopeActive($query)
     {
         return $query->whereIn('status', ['Active']);
@@ -50,8 +55,7 @@ class Post extends Model
 
     public function scopeTrending($query)
     {
-        return $query->with('comments')->get()->sortByDesc(function($q)
-        {
+        return $query->with('comments')->get()->sortByDesc(function ($q) {
             return $q->comments->count();
         })->take(5);
     }

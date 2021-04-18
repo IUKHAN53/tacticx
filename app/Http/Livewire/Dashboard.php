@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Models\Post;
+use App\Models\UserPostsSubscriptions;
 use Livewire\Component;
 use Spatie\Tags\Tag;
 
@@ -21,11 +22,11 @@ class Dashboard extends Component
 
         if (isset($this->q)) {
             request()->flash();
-            $this->posts = Post::search($this->q)->active()->with('comments', 'tags', 'user')->orderBY('published_at','desc')->get();
+            $this->posts = Post::search($this->q)->active()->with('comments', 'tags', 'user')->orderBY('published_at', 'desc')->get();
         } else {
-            $this->posts = Post::active()->with('comments', 'tags', 'user')->orderBY('published_at','desc')->get();
+            $this->posts = Post::active()->with('comments', 'tags', 'user')->orderBY('published_at', 'desc')->get();
         }
-        $this->tags = Tag::orderBy('created_at','desc')->take(8)->get();
+        $this->tags = Tag::orderBy('created_at', 'desc')->take(8)->get();
     }
 
     public function render()
@@ -63,13 +64,30 @@ class Dashboard extends Component
         } elseif ($tabName == 'Cancelled') {
             $post = $post->cancelled();
         }
-        $this->posts = $post->with(['comments','tags', 'user'])->orderBY('published_at','desc')->get();
+        $this->posts = $post->with(['comments', 'tags', 'user'])->orderBY('published_at', 'desc')->get();
     }
 
     public function filterByTag(Tag $tag)
     {
-        $this->selectedTag = ($this->selectedTag == $tag)?[]:$tag;
+        $this->selectedTag = ($this->selectedTag == $tag) ? [] : $tag;
         $this->setTab($this->tab);
+    }
+
+    public function subscribeToPost(Post $post)
+    {
+        if ($post->type == 'Pro' && auth()->user()->status == 'Basic') {
+            session()->flash('flash.banner', 'Please upgrade your membership to subscribe for this post.!');
+            session()->flash('flash.bannerStyle', 'danger');
+        } else {
+            $subscriptions = UserPostsSubscriptions::updateOrCreate([
+                'user_id' => auth()->id(),
+                'post_id' => $post->id,
+            ]);
+            if($subscriptions){
+                session()->flash('flash.banner', 'Subscription to post successful.!');
+                session()->flash('flash.bannerStyle', 'success');
+            }
+        }
     }
 
 }

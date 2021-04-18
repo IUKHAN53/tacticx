@@ -90,19 +90,56 @@
                                              class="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
                                              role="menu" aria-orientation="vertical" aria-labelledby="options-menu-0"
                                              style="display: none;">
+                                            @role('Member')
                                             <div class="py-1" role="none">
-                                                <a href="#"
+                                                <a href="#" wire:click="subscribeToPost({{$post->id}})"
                                                    class="flex px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
                                                    role="menuitem">
-                                                    <svg class="h-6 w-6" x-description="Heroicon name: outline/bell" xmlns="http://www.w3.org/2000/svg"
-                                                         fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    <svg class="h-6 w-6" x-description="Heroicon name: outline/bell"
+                                                         xmlns="http://www.w3.org/2000/svg"
+                                                         fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                                                         aria-hidden="true">
+                                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                                              stroke-width="2"
                                                               d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9">
                                                         </path>
                                                     </svg>
                                                     <span> Subscribe</span>
                                                 </a>
                                             </div>
+                                            @else
+                                                @if(auth()->id() == $post->id)
+                                                    <div class="py-1" role="none">
+                                                        <a href="{{route('editor-add-post',['post_id'=>$post->id])}}"
+                                                           class="flex px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+                                                           role="menuitem">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6"
+                                                                 fill="none"
+                                                                 viewBox="0 0 24 24" stroke="currentColor">
+                                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                                      stroke-width="2"
+                                                                      d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                                                            </svg>
+                                                            <span>Edit</span>
+                                                        </a>
+                                                    </div>
+                                                @else
+                                                    <div class="py-1" role="none">
+                                                        <a href="#" wire:click="postDetails({{$post->id}})"
+                                                           class="flex px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+                                                           role="menuitem">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                 height="24" viewBox="0 0 24 24">
+                                                                <path
+                                                                    d="M15 12c0 1.654-1.346 3-3 3s-3-1.346-3-3 1.346-3 3-3 3 1.346 3 3zm9-.449s-4.252 8.449-11.985 8.449c-7.18
+                                                                    0-12.015-8.449-12.015-8.449s4.446-7.551 12.015-7.551c7.694 0 11.985 7.551 11.985 7.551zm-7 .449c0-2.757-2.243-5-5-5s-5
+                                                                    2.243-5 5 2.243 5 5 5 5-2.243 5-5z"/>
+                                                            </svg>
+                                                            <span>View Post</span>
+                                                        </a>
+                                                    </div>
+                                                @endif
+                                                @endrole
                                         </div>
 
                                     </div>
