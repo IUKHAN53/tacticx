@@ -26,15 +26,15 @@ class ShowPost extends Component
         $this->tags = Tag::orderBy('created_at','desc')->take(8)->get();
         $this->post = Post::with('comments','tags','user')->findOrFail($this->post_id);
         $this->comments = $this->post->comments;
+        if(auth()->user()->status == 'Basic' && $this->post->type == 'Pro'){
+            abort(403);
+        }
     }
 
     public function render()
     {
-        if(auth()->user()->status == 'Basic' && $this->post->type == 'Pro'){
-            abort(403);
-        }else{
+
             return view('livewire.posts.show-post');
-        }
     }
 
     public function postComment(){
