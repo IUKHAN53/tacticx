@@ -2,6 +2,7 @@
 
 namespace App\Observers;
 
+use App\Models\Notification;
 use App\Models\Post;
 use App\Models\User;
 use App\Notifications\PostCreatedNotification;
@@ -9,30 +10,29 @@ use App\Notifications\PostModifiedNotification;
 
 class PostObserver
 {
-    /**
-     * Handle the Post "created" event.
-     *
-     * @param  \App\Models\Post  $post
-     * @return void
-     */
+
     public function created(Post $post)
     {
         $members = User::role('Member')->get();
         foreach ($members as $member){
+            Notification::create([
+                'user_id' => $member->id,
+                'post_id' => $post->id,
+                'message' => 'created',
+            ]);
             $member->notify(new PostCreatedNotification($post));
         }
     }
 
-    /**
-     * Handle the Post "updated" event.
-     *
-     * @param  \App\Models\Post  $post
-     * @return void
-     */
     public function updated(Post $post)
     {
         $members = $post->subscriptions;
         foreach ($members as $member){
+            Notification::create([
+                'user_id' => $member->id,
+                'post_id' => $post->id,
+                'message' => 'updated',
+            ]);
             $member->user->notify(new PostModifiedNotification($post));
         }
     }

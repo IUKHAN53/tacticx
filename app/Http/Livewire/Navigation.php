@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Notification;
 use App\Models\User;
 use App\Notifications\RequestProNotification;
 use Livewire\Component;
@@ -9,6 +10,11 @@ use Livewire\Component;
 class Navigation extends Component
 {
     public $requestProModal = false;
+    public $notifications;
+
+    public function mount(){
+        $this->notifications = auth()->user()->notifications;
+    }
 
     public function render()
     {

@@ -1,7 +1,7 @@
 <header class="bg-white shadow-sm lg:static lg:overflow-y-visible"
         x-state:on="Menu open" x-state:off="Menu closed"
         :class="{ 'fixed inset-0 z-40 overflow-y-auto': open }"
-        x-data="{ open: false, focus: false}"
+        x-data="{ open: false, focus: false,notification: false}"
         x-init="" @keydown.escape="onEscape" @close-popover-group.window="onClosePopoverGroup">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="relative flex justify-between xl:grid xl:grid-cols-12 lg:gap-8">
@@ -48,8 +48,9 @@
             <div class="flex items-center md:absolute md:right-0 md:inset-y-0 lg:hidden">
                 <!-- Mobile menu button -->
                 <button @click="open = !(open)"
-                    class="-mx-2 rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:bg-gray-100
-                hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-gray-500" aria-expanded="false">
+                        class="-mx-2 rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:bg-gray-100
+                hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-gray-500"
+                        aria-expanded="false">
                     <span class="sr-only">Open menu</span>
                     <svg x-state:on="Menu open" x-state:off="Menu closed" class="block h-6 w-6"
                          :class="{ 'hidden': open, 'block': !(open) }" xmlns="http://www.w3.org/2000/svg"
@@ -83,17 +84,61 @@
                     </a>
                 @endif
                 @endrole
-                <a href="#"
-                   class="ml-5 flex-shrink-0 bg-white rounded-full p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
-                    <span class="sr-only">View notifications</span>
-                    <svg class="h-6 w-6" x-description="Heroicon name: outline/bell" xmlns="http://www.w3.org/2000/svg"
-                         fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                              d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9">
-                        </path>
-                    </svg>
-                </a>
-
+                {{--                Notification dropdwon --}}
+                <div class="relative inline-block text-left" x-data="{ notification: false }" @keydown.escape.stop="notification = false" @click.away="notification = false">
+                    <button @click="notification = !notification"
+                            class="ml-5 flex-shrink-0 bg-white rounded-full p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
+                        <span class="sr-only">View notifications</span>
+                        <svg class="h-6 w-6" x-description="Heroicon name: outline/bell"
+                             xmlns="http://www.w3.org/2000/svg"
+                             fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9">
+                            </path>
+                        </svg>
+                    </button>
+                    <div x-description="Dropdown menu, show/hide based on menu state." x-show="notification"
+                         x-transition:enter="transition ease-out duration-100"
+                         x-transition:enter-start="transform opacity-0 scale-95"
+                         x-transition:enter-end="transform opacity-100 scale-100"
+                         x-transition:leave="transition ease-in duration-75"
+                         x-transition:leave-start="transform opacity-100 scale-100"
+                         x-transition:leave-end="transform opacity-0 scale-95"
+                         class="origin-top-right absolute right-0 z-10 mt-2 w-auto rounded-md shadow-lg bg-white ring-1
+                        ring-black ring-opacity-5 focus:outline-none"
+                         role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
+                        <ul class="divide-y divide-gray-200">
+                            @forelse($notifications as $notification)
+                                <li class="relative bg-white py-5 px-4 hover:bg-gray-50 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600">
+                                    <div class="flex justify-between space-x-3">
+                                        <div class="min-w-0 flex-1">
+                                            <a href="#" class="block focus:outline-none">
+                                                <span class="absolute inset-0" aria-hidden="true"></span>
+                                                <p class="text-sm font-medium text-gray-900 truncate">
+                                                    {{($notification->message == 'created')?'New Post Added!':'Subscribed post updated'}}</p>
+                                                <p class="text-sm text-gray-500 truncate">{{$notification->post->pair->name}}
+                                                    - {{$notification->post->strategy}}</p>
+                                            </a>
+                                        </div>
+                                        <time datetime="2021-01-27T16:35"
+                                              class="flex-shrink-0 whitespace-nowrap text-sm text-gray-500">{{$notification->created_at->diffForHumans()}}
+                                        </time>
+                                    </div>
+                                    <div class="mt-1">
+                                        <p class="line-clamp-2 text-sm text-gray-600">
+                                            {{($notification->message == 'created')?'A new post has been created click to view post':
+                                                'A post you subscribed to has been updated. Click to view!'}}
+                                        </p>
+                                    </div>
+                                </li>
+                            @empty
+                                <li class="relative bg-white py-5 px-4 hover:bg-gray-50 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600">
+                                    Nothing here...
+                                </li>
+                            @endforelse
+                        </ul>
+                    </div>
+                </div>
                 <!-- Profile dropdown -->
                 <div x-data="{ open: false }" @keydown.escape.stop="open = false" @click.away="open = false"
                      class="flex-shrink-0 relative ml-5">
@@ -163,7 +208,7 @@
     </div>
 
     <nav class="lg:hidden">
-        <div x-show="open" >
+        <div x-show="open">
             <div class="max-w-3xl mx-auto px-2 pt-2 pb-3 space-y-1 sm:px-4">
                 <a href="#" aria-current="page"
                    class="bg-gray-100 text-gray-900 block rounded-md py-2 px-3 text-base font-medium text-gray-900"
