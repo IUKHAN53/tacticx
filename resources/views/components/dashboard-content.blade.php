@@ -2,14 +2,14 @@
     <div class="px-4 sm:px-0">
         <div class="sm:hidden">
             <label for="question-tabs" class="sr-only">Select a tab</label>
-            <select id="question-tabs"
+            <select id="question-tabs" wire:change="setTab($event.target.value)"
                     class="block w-full rounded-md border-gray-300 text-base font-medium text-gray-900 shadow-sm focus:border-gray-500 focus:ring-gray-500">
 
-                <option {{$tab == 'Active'?'selected':''}}>Active</option>
+                <option {{$tab == 'Active'?'selected':''}} value="Active">Active</option>
 
-                <option {{$tab == 'Closed'?'selected':''}}>Closed</option>
+                <option {{$tab == 'Closed'?'selected':''}} value="Closed">Closed</option>
 
-                <option {{$tab == 'Cancelled'?'selected':''}}>Cancelled</option>
+                <option {{$tab == 'Cancelled'?'selected':''}} value="Cancelled">Cancelled</option>
 
             </select>
         </div>

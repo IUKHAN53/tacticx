@@ -109,27 +109,28 @@
                          role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
                         <ul class="divide-y divide-gray-200">
                             @forelse($notifications as $notification)
-                                <li class="relative bg-white py-5 px-4 hover:bg-gray-50 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600">
-                                    <div class="flex justify-between space-x-3">
-                                        <div class="min-w-0 flex-1">
-                                            <a href="#" class="block focus:outline-none">
-                                                <span class="absolute inset-0" aria-hidden="true"></span>
-                                                <p class="text-sm font-medium text-gray-900 truncate">
-                                                    {{($notification->message == 'created')?'New Post Added!':'Subscribed post updated'}}</p>
-                                                <p class="text-sm text-gray-500 truncate">{{$notification->post->pair->name}}
-                                                    - {{$notification->post->strategy}}</p>
-                                            </a>
+                                <li @click="document.location.href='{{route('show-post',$notification->post->id)}}'" class="relative bg-white py-5 px-4 hover:bg-gray-50
+                                focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600">
+                                        <div class="flex justify-between space-x-3">
+                                            <div class="min-w-0 flex-1">
+                                                <a href="#" class="block focus:outline-none">
+                                                    <span class="absolute inset-0" aria-hidden="true"></span>
+                                                    <p class="text-sm font-medium text-gray-900 truncate">
+                                                        {{($notification->message == 'created')?'New Post Added!':'Subscribed post updated'}}</p>
+                                                    <p class="text-sm text-gray-500 truncate">{{$notification->post->pair->name}}
+                                                        - {{$notification->post->strategy}}</p>
+                                                </a>
+                                            </div>
+                                            <time datetime="2021-01-27T16:35"
+                                                  class="flex-shrink-0 whitespace-nowrap text-sm text-gray-500">{{$notification->created_at->diffForHumans()}}
+                                            </time>
                                         </div>
-                                        <time datetime="2021-01-27T16:35"
-                                              class="flex-shrink-0 whitespace-nowrap text-sm text-gray-500">{{$notification->created_at->diffForHumans()}}
-                                        </time>
-                                    </div>
-                                    <div class="mt-1">
-                                        <p class="line-clamp-2 text-sm text-gray-600">
-                                            {{($notification->message == 'created')?'A new post has been created click to view post':
-                                                'A post you subscribed to has been updated. Click to view!'}}
-                                        </p>
-                                    </div>
+                                        <div class="mt-1">
+                                            <p class="line-clamp-2 text-sm text-gray-600">
+                                                {{($notification->message == 'created')?'A new post has been created click to view post':
+                                                    'A post you subscribed to has been updated. Click to view!'}}
+                                            </p>
+                                        </div>
                                 </li>
                             @empty
                                 <li class="relative bg-white py-5 px-4 hover:bg-gray-50 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600">
@@ -215,13 +216,13 @@
                    x-state:on="Current" x-state:off="Default">Home</a>
 
                 <a href="#" class="hover:bg-gray-50 block rounded-md py-2 px-3 text-base font-medium text-gray-900">
-                    Popular</a>
+                    Education</a>
 
                 <a href="#" class="hover:bg-gray-50 block rounded-md py-2 px-3 text-base font-medium text-gray-900"
-                >Communities</a>
+                >Community</a>
 
                 <a href="#" class="hover:bg-gray-50 block rounded-md py-2 px-3 text-base font-medium text-gray-900"
-                >Trending</a>
+                >Terms</a>
             </div>
             <div class="border-t border-gray-200 pt-4 pb-3">
                 <div class="max-w-3xl mx-auto px-4 flex items-center sm:px-6">

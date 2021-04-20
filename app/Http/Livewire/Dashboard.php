@@ -90,4 +90,8 @@ class Dashboard extends Component
         }
     }
 
+    public function tabChanged(){
+        $this->setTab($this->tab);
+    }
+
 }
