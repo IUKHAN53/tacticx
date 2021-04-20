@@ -1,7 +1,7 @@
 <div class="lg:col-span-12 xl:col-span-12">
     <div class="flex mt-6 justify-end">
         <a href="{{route('admin-add-user')}}" class="ml-6 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium cursor-pointer
-        rounded-md shadow-sm text-white bg-gray-600 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
+        rounded-md shadow-sm text-white bg-gray-900 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
             Add new User
         </a>
     </div>
@@ -48,7 +48,7 @@
 
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full
-                                {{($user->status == 'Basic')?'bg-yellow-100 text-yellow-800':'bg-gray-600 text-white'}}">
+                                {{($user->status == 'Basic')?'bg-gray-400 text-white':'bg-gray-900 text-white'}}">
                                         {{$user->status}}
                                     </span>
                                 </td>

@@ -145,31 +145,31 @@
                                     </div>
                                 </div>
                             </div>
-                            <h2 id="question-title-81614" class="mt-4 text-base font-medium text-gray-900">
-                                <span class="font-semibold">
-                                    {{$post->pair->name}}
-                                </span>
-                                @foreach($post->tags->pluck('name') as $tag)
-                                    <span
-                                        class="inline-flex items-center px-3 py-0.5 rounded-full bg-gray-50 text-sm font-medium text-gray-700 hover:bg-gray-100">
-                                        {{$tag}}
+                            <div class="cursor-pointer">
+                                <button type="button" wire:click="postDetails({{$post->id}})">
+                                <h2 id="question-title-81614" class="mt-4 text-base font-medium text-gray-900">
+                                    <span class="font-semibold">
+                                        {{$post->pair->name}}
                                     </span>
-                                @endforeach
-                                <span
-                                    class="inline-flex items-center px-3 py-0.5 rounded-full bg-green-50 text-sm font-medium text-green-700 hover:bg-green-100">
-                                    {{$post->timeframe}}
-                                </span>
-                            </h2>
+                                    @foreach($post->tags->pluck('name') as $tag)
+                                        <span
+                                            class="inline-flex items-center px-3 py-0.5 rounded-full bg-gray-50 text-sm font-medium text-gray-700 hover:bg-gray-100">
+                                            {{$tag}}
+                                        </span>
+                                    @endforeach
+                                    <span
+                                        class="inline-flex items-center px-3 py-0.5 rounded-full bg-gray-200 text-sm font-medium text-gray-700 hover:bg-gray-100">
+                                        {{$post->strategy}}
+                                    </span>
+                                </h2>
+                                </button>
+                            </div>
                         </div>
                         <div class="mt-2 text-sm text-gray-700 space-y-4">
                             <p class="line-clamp-3">
                                 {{$post->description}}
                             </p>
                             <div class="flex items-center justify-end">
-                                <button type="button" wire:click="postDetails({{$post->id}})"
-                                        class="inline-flex items-center px-2.5 py-1.5 border border-gray-300 shadow-sm text-xs font-medium rounded text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                                    View details
-                                </button>
                             </div>
 
                         </div>
@@ -211,7 +211,20 @@
                     </article>
                 </li>
             @empty
-                <p>No posts added in this criteria.</p>
+            <!-- This example requires Tailwind CSS v2.0+ -->
+                <div class="bg-gray-50 sm:rounded-lg">
+                <div class="px-4 py-5 sm:p-6">
+                    <h3 class="text-md leading-6 font-medium text-gray-900">
+                    No Matches Found
+                    </h3>
+                    <div class="mt-2 max-w-xl text-sm text-gray-500">
+                    <p>
+                        Please trying another search with different criteria.
+                    </p>
+                    </div>
+                </div>
+                </div>
+
             @endforelse
         </ul>
     </div>

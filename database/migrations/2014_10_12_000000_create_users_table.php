@@ -24,7 +24,7 @@ class CreateUsersTable extends Migration
             $table->text('two_factor_recovery_codes')->nullable();
             $table->foreignId('current_team_id')->nullable();
             $table->text('profile_photo_path')->nullable();
-            $table->enum('status', ['Pro', 'Basic', 'Banned']);
+            $table->enum('status', ['Pro', 'Basic', 'Banned'])->default('Basic');
             $table->timestamps();
         });
     }

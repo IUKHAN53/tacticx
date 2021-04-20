@@ -8,9 +8,7 @@
             <div class="flex md:absolute md:left-0 md:inset-y-0 lg:static xl:col-span-2">
                 <div class="flex-shrink-0 flex items-center">
                     <a href="{{route('dashboard')}}">
-                        <img class="block h-8 w-auto"
-                             src="https://tailwindui.com/img/logos/workflow-mark.svg?color=gray&amp;shade=500"
-                             alt="Workflow">
+                        <x-jet-application-mark class="block w-auto" />
                     </a>
                 </div>
             </div>
@@ -38,7 +36,7 @@
                                                 pr-3 text-sm placeholder-gray-500 focus:outline-none focus:text-gray-900
                                                  focus:placeholder-gray-400 focus:ring-1 focus:ring-gray-500
                                                  focus:border-gray-500 sm:text-sm"
-                                       placeholder="Search" type="search">
+                                       placeholder="Search Crypto Pairs: BTC, USDT, ETH" type="search">
                                 <input type="submit"
                                        style="position: absolute; left: -9999px; width: 1px; height: 1px;"
                                        tabindex="-1"/>
@@ -140,7 +138,7 @@
                 @role('Editor')
                 <a href="{{route('editor-add-post')}}"
                    class="ml-6 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium
-                    rounded-md shadow-sm text-white bg-gray-600 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
+                    rounded-md shadow-sm text-white bg-gray-900 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
                     New Post
                 </a>
                 @endrole
@@ -148,13 +146,13 @@
                 @if(Request::is('admin/*'))
                     <a href="{{route('dashboard',['from'=>'admin'])}}"
                        class="ml-6 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium
-                    rounded-md shadow-sm text-white bg-gray-600 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
+                    rounded-md shadow-sm text-white bg-gray-900 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
                         Dashboard
                     </a>
                 @else
                     <a href="{{route('admin-dashboard')}}"
                        class="ml-6 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium
-                    rounded-md shadow-sm text-white bg-gray-600 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
+                    rounded-md shadow-sm text-white bg-gray-900 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
                         Admin
                     </a>
                 @endif
